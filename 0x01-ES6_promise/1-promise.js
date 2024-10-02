@@ -9,9 +9,6 @@ const getFullResponseFromAPI = (success) => {
       reject(new Error('The fake API is not working currently'));
     }
   });
-  mypromise.finally(() => {
-    /* console.log('done'); */
-  });
   return mypromise;
 };
 export default getFullResponseFromAPI;
