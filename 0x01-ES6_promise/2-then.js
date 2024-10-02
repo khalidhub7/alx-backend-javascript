@@ -8,5 +8,6 @@ const handleResponseFromAPI = (promise) => {
     .finally(() => {
       console.log('Got a response from the API');
     });
+  return promise;
 };
 export default handleResponseFromAPI;
