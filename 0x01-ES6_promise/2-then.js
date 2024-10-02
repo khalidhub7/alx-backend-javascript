@@ -1,16 +1,11 @@
 const handleResponseFromAPI = (promise) => {
-  const mypromise = new Promise((resolve, reject) => {
-  });
-
-  promise.then(() => {
-    resolve({
+  promise
+    .then(() => ({
       status: 200,
       body: 'success',
+    }))
+    .catch(() => new Error('fetching error'))
+    .finally(() => {
+      console.log('Got a response from the API');
     });
-  }).catch(() => {
-    reject(new Error('fetching error'));
-  });
-  console.log('Got a response from the API');
-  return mypromise;
 };
-export default handleResponseFromAPI;
