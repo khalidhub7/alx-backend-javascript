@@ -1,13 +1,14 @@
 const handleResponseFromAPI = (promise) => {
   const mypromise = new Promise((resolve, reject) => {
-    if (promise) {
-      resolve({
-        status: 200,
-        body: 'success',
-      });
-    } else {
-      reject(new Error('fetching error'));
-    }
+  });
+
+  mypromise.then(() => {
+    resolve({
+      status: 200,
+      body: 'success',
+    });
+  }).catch(() => {
+    reject(new Error(''));
   });
   console.log('Got a response from the API');
   return mypromise;
