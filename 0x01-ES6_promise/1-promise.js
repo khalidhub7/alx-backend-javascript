@@ -10,7 +10,7 @@ const getFullResponseFromAPI = (success) => {
     }
   });
   mypromise.finally(() => {
-    console.log('done');
+    /* console.log('done'); */
   });
   return mypromise;
 };
