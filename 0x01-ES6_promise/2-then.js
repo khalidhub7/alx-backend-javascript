@@ -9,3 +9,4 @@ const handleResponseFromAPI = (promise) => {
       console.log('Got a response from the API');
     });
 };
+export default handleResponseFromAPI;
