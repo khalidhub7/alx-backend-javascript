@@ -1,3 +1,5 @@
+import Currency from './main.js';
+
 export default class Pricing {
   constructor(amount, currency) {
     this.amount = amount;
@@ -8,12 +10,15 @@ export default class Pricing {
     this._amount = value;
   }
 
-  set currency(value) {
+  /* set currency(value) {
     if (value instanceof Currency) {
       this._currency = value;
     } else {
       throw new TypeError('currency instanceof Currency');
     }
+  } */
+  set currency(currency) {
+    this._currency = currency;
   }
 
   get amount() {
