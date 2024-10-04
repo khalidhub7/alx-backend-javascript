@@ -1,12 +1,5 @@
-const getResponseFromAPI = () => {
-  const mypromise = new Promise((resolve, reject) => {
-    resolve();
-    reject();
+#!/usr/bin/env node
+export default function getResponseFromAPI() {
+  return new Promise(() => {
   });
-  mypromise.then(() => {
-  }).catch(() => {
-  }).finally(() => {
-  });
-  return mypromise;
-};
-export default getResponseFromAPI;
+}
