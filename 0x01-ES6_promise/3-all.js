@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { uploadPhoto, createUser } from './utils.js';
 
 export default function handleProfileSignup () {
