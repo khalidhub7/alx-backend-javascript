@@ -1,12 +1,10 @@
 import ClassRoom from './0-classroom.js';
 
 const initializeRooms = () => {
-  const lisst = [19, 20, 34];
-  let i = 0;
-  while (i < lisst.length) {
-    lisst[i] = new ClassRoom(lisst[i]);
-    i += 1;
-  }
-  return lisst;
+  const list = [19, 20, 34];
+  list.forEach((room, index) => {
+    list[index] = new ClassRoom(room);
+  });
+  return list;
 };
 export default initializeRooms;
