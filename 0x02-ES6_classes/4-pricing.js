@@ -5,18 +5,15 @@ export default class Pricing {
   }
 
   set amount(value) {
-    this._amount = value;
+    if (typeof (value) === 'number') {
+      this._amount = Number(value);
+    }
   }
 
-  /* set currency(value) {
-    if (value instanceof Currency) {
-      this._currency = value;
-    } else {
-      throw new TypeError('currency instanceof Currency');
+  set currency(value) {
+    if (typeof (value) === 'object') {
+      this._currency = (value);
     }
-  } */
-  set currency(currency) {
-    this._currency = currency;
   }
 
   get amount() {
@@ -28,10 +25,10 @@ export default class Pricing {
   }
 
   displayFullPrice() {
-    return `${this._amount} ${this._currency.name} (${this._currency.code})`;
+    return `${this._amount} ${this._currency._name} (${this._currency._code})`;
   }
 
-  static convertPrice(amount, conversionRate) {
-    return amount * conversionRate;
+  convertPrice(amount, conversionRate) {
+    return Number(amount) * Number(conversionRate);
   }
 }
