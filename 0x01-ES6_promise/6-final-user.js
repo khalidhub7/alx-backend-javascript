@@ -1,3 +1,17 @@
+import signUpUser from './4-user-promise';
+import uploadPhoto from './5-photo-reject';
+
+export default function handleProfileSignup(firstName, lastName, fileName) {
+  return Promise.allSettled([
+    signUpUser(firstName, lastName),
+    uploadPhoto(fileName),
+  ]).then((args) => [
+    args.forEach((element) => ({
+      status: element.status,
+      value: element.status === 'fulfilled' ? element.value : element.reason,
+    })),
+  ]);
+}
 /* export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise
     .allSettled([
@@ -24,17 +38,3 @@
       return khalid;
     });
 } */
-import signUpUser from './4-user-promise';
-import uploadPhoto from './5-photo-reject';
-
-export default function handleProfileSignup(firstName, lastName, fileName) {
-  return Promise.allSettled([
-    signUpUser(firstName, lastName),
-    uploadPhoto(fileName),
-  ]).then((data) => 
-    data.map((i) => ({
-      status: i.status,
-      value: i.status === 'fulfilled' ? i.value : i.reason,
-    }))
-  );
-}
