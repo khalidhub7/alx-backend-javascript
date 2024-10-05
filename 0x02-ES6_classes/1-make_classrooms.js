@@ -1,10 +1,9 @@
 import ClassRoom from './0-classroom.js';
 
-const initializeRooms = () => {
-  const list = [19, 20, 34];
-  list.forEach((room, index) => {
-    list[index] = new ClassRoom(room);
-  });
-  return list;
-};
-export default initializeRooms;
+export default function initializeRooms() {
+  return [
+    new ClassRoom(19),
+    new ClassRoom(20),
+    new ClassRoom(34),
+  ];
+}
