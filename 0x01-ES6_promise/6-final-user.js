@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-import signUpUser from './4-user-promise';
-import uploadPhoto from './5-photo-reject';
+import signUpUser from './4-user-promise.js';
+import uploadPhoto from './5-photo-reject.js';
 
-export default async function handleProfileSignup(firstName, lastName, fileName) {
-  const data = await Promise.allSettled([
+export default async (firstName, lastName, fileName) => {
+  const results = await Promise.allSettled([
     signUpUser(firstName, lastName),
     uploadPhoto(fileName),
   ]);
 
-  return data.map((i) => ({
-    status: i.status,
-    value: i.status === 'fulfilled' ? i.value : String(i.reason),
+  return results.map(({ status, value, reason }) => ({
+    status,
+    value: status === 'fulfilled' ? value : String(reason),
   }));
-}
+};
 /* export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise
     .allSettled([
