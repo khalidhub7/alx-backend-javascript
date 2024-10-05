@@ -5,7 +5,7 @@ const initializeRooms = () => {
   let i = 0;
   while (i < lisst.length) {
     lisst[i] = new ClassRoom(lisst[i]);
-    i++;
+    i += 1;
   }
   return lisst;
 };
