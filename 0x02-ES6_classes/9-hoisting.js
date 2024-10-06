@@ -5,27 +5,11 @@ export class HolbertonClass {
   }
 
   set year(value) {
-    if (!value) {
-      this._year = 0;
-    }
-    if (typeof (value) === 'number') {
-      this._year = value;
-    }
-    if (typeof (value) !== 'number') {
-      this._year = 0;
-    }
+    this._year = (typeof value === 'number') ? value : 0;
   }
 
   set location(value) {
-    if (!value) {
-      this._location = '';
-    }
-    if (typeof (value) === 'string') {
-      this._location = value;
-    }
-    if (typeof (value) !== 'string') {
-      this._location = '';
-    }
+    this._location = (typeof value === 'string') ? value : '';
   }
 
   get year() {
@@ -36,6 +20,7 @@ export class HolbertonClass {
     return this._location;
   }
 }
+
 export default class StudentHolberton {
   constructor(firstName, lastName, holbertonClass) {
     this.firstName = firstName;
@@ -44,27 +29,11 @@ export default class StudentHolberton {
   }
 
   set firstName(value) {
-    if (!value) {
-      this._firstName = '';
-    }
-    if (typeof (value) === 'string') {
-      this._firstName = value;
-    }
-    if (typeof (value) !== 'string') {
-      this._firstName = '';
-    }
+    this._firstName = (typeof value === 'string') ? value : '';
   }
 
   set lastName(value) {
-    if (!value) {
-      this._lastName = '';
-    }
-    if (typeof (value) === 'string') {
-      this._lastName = value;
-    }
-    if (typeof (value) !== 'string') {
-      this._lastName = '';
-    }
+    this._lastName = (typeof value === 'string') ? value : '';
   }
 
   get firstName() {
@@ -76,15 +45,7 @@ export default class StudentHolberton {
   }
 
   set holbertonClass(value) {
-    if (!value) {
-      this._holbertonClass = {};
-    }
-    if (value instanceof HolbertonClass) {
-      this._holbertonClass = value;
-    }
-    if (!(value instanceof HolbertonClass)) {
-      this._holbertonClass = {};
-    }
+    this._holbertonClass = (value instanceof HolbertonClass) ? value : null;
   }
 
   get fullName() {
@@ -96,7 +57,9 @@ export default class StudentHolberton {
   }
 
   get fullStudentDescription() {
-    return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
+    return this._holbertonClass 
+      ? `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}` 
+      : `${this._firstName} ${this._lastName} - No class assigned`;
   }
 }
 
