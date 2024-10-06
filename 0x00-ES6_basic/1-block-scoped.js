@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-/* eslint-disable-next-line no-unused-vars */
+/* eslint-disable no-unused-vars */
 export default function taskBlock(trueOrFalse) {
-  let task = false;
-  let task2 = true;
+  const task = false;
+  const task2 = true;
   if (trueOrFalse) {
-    task = true;
-    task2 = false;
+    const task = true;
+    const task2 = false;
   }
   return [task, task2];
 }
