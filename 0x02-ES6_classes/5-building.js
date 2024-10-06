@@ -6,6 +6,16 @@ export default class Building {
 vacuationWarningMessage');
       }
     }
-    this._sqft = sqft;
+    this.sqft = sqft;
+  }
+
+  set sqft(value) {
+    if (typeof (value) === 'number') {
+      this._sqft = value;
+    }
+  }
+
+  get sqft() {
+    return this._sqft;
   }
 }
