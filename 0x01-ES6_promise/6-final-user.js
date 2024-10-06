@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/extensions
 import signUpUser from './4-user-promise';
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/extensions
 import uploadPhoto from './5-photo-reject';
-
+// eslint-disable-next-line no-unused-vars
 export default async (firstName, lastName, fileName) => {
   const results = await Promise.allSettled([
     signUpUser(firstName, lastName),
@@ -16,8 +16,8 @@ export default async (firstName, lastName, fileName) => {
   }));
 };
 
-/*
-// eslint-disable-next-line import/no-unresolved
+/* 
+// eslint-disable-next-line import/extensions
 export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise
     .allSettled([
@@ -27,6 +27,7 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     .then((data) => {
       const khalid = [];
       let i = 0;
+      // eslint-disable-next-line no-plusplus
       while (i < data.length) {
         if (data[i].status === 'fulfilled') {
           khalid.push({
@@ -43,5 +44,5 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
       }
       return khalid;
     });
-}
+} 
 */
