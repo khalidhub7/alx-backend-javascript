@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+// eslint-disable-next-line import/no-unresolved
 import signUpUser from './4-user-promise';
+// eslint-disable-next-line import/no-unresolved
 import uploadPhoto from './5-photo-reject';
 
 export default async (firstName, lastName, fileName) => {
@@ -13,7 +15,10 @@ export default async (firstName, lastName, fileName) => {
     value: status === 'fulfilled' ? value : String(reason),
   }));
 };
-/* export default function handleProfileSignup(firstName, lastName, fileName) {
+
+/*
+// eslint-disable-next-line import/no-unresolved
+export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise
     .allSettled([
       signUpUser(firstName, lastName),
@@ -38,4 +43,5 @@ export default async (firstName, lastName, fileName) => {
       }
       return khalid;
     });
-} */
+}
+*/
