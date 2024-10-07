@@ -1,15 +1,18 @@
-import getBudgetObject from './7-getBudgetObject';
+#!/usr/bin/env node
+const getBudgetObject = require('./7-getBudgetObject');
 
-export default function getFullBudgetObject(income, gdp, capita) {
+function getFullBudgetObject(income, gdp, capita) {
   const budget = getBudgetObject(income, gdp, capita);
   const fullBudget = {
     ...budget,
-    getIncomeInDollars(income) {
+    getIncomeInDollars: function(income) {
       return `$${income}`;
     },
-    getIncomeInEuros(income) {
+    getIncomeInEuros: function(income) {
       return `${income} euros`;
     },
   };
   return fullBudget;
 }
+
+module.exports = getFullBudgetObject;
