@@ -7,12 +7,12 @@ export default async (firstName, lastName, fileName) => {
     signUpUser(firstName, lastName),
     uploadPhoto(fileName),
   ]);
-
   return results.map(({ status, value, reason }) => ({
     status,
     value: status === 'fulfilled' ? value : String(reason),
   }));
 };
+
 /* export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise
     .allSettled([
