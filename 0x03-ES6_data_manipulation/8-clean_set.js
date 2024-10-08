@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 export default function cleanSet(set, start) {
   const filtered = [];
-
   if (
     !(set instanceof Set)
       || typeof start !== 'string'
@@ -10,7 +9,6 @@ export default function cleanSet(set, start) {
   ) {
     return '';
   }
-
   for (const i of set) {
     if (typeof i === 'string' && i
          !== null && i.startsWith(start)) {
@@ -18,6 +16,5 @@ export default function cleanSet(set, start) {
       filtered.push(newstr);
     }
   }
-
   return filtered.join('-');
 }
