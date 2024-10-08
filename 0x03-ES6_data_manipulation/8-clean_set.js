@@ -2,11 +2,7 @@
 export default function cleanSet(set, start) {
   const filtred = [];
   for (const i of set) {
-    if (start === '') {
-      return '';
-    }
-
-    if (i.startsWith(start)) {
+    if (i.startsWith(start) && start[0] != "") {
       const newstr = i.slice(start.length);
       filtred.push(newstr);
     }
