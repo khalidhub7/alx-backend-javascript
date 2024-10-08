@@ -11,7 +11,9 @@ export default function cleanSet(set, start) {
   for (const i of set) {
     if (i.startsWith(start)) {
       const newstr = i.slice(start.length);
-      filtred.push(newstr);
+      if (newstr.length > 0) {
+        filtred.push(newstr);
+      }
     }
   }
   return filtred.join('-');
