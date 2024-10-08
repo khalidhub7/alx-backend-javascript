@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 export default function cleanSet(set, start) {
-  const filtred = [];
+  const filtered = [];
+
   if (
     !(set instanceof Set)
-    || start.length === 0
-    || typeof start !== 'string'
-    || set.size === 0
+      || typeof start !== 'string'
+      || start.trim().length === 0
+      || set.size === 0
   ) {
     return '';
   }
+
   for (const i of set) {
-    if (typeof (i) === 'string' && typeof(i) !== "undefined") {
-      if (i.startsWith(start)) {
-        const newstr = i.slice(start.length);
-        if (newstr.length > 0) {
-          filtred.push(newstr);
-        }
-      }
+    if (typeof i === 'string' && i
+         !== null && i.startsWith(start)) {
+      const newstr = i.slice(start.length);
+      filtered.push(newstr);
     }
   }
-  return filtred.join('-');
+
+  return filtered.join('-');
 }
