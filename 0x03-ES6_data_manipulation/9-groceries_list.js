@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 export default function groceriesList() {
   const keys = ['Apples', 'Tomatoes',
     'Pasta', 'Rice', 'Banana'];
