@@ -1,51 +1,44 @@
-export interface Teacher {
+interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [index:string]: any;
+  [moreekeys: string]: any;
 }
-
-export interface Directors extends Teacher {
+interface Directors extends Teacher {
   numberOfReports: number;
 }
-
-export interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
-
-export function printTeacher(firstName: string, lastName: string): string {
+function printTeacher(firstName: string, lastName: string) {
   return `${firstName[0]}. ${lastName}`;
 }
-
-export interface IStudentClassConstructor {
-  new (firstName: string, lastName: string): IStudentClass;
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
 }
-
-export interface IStudentClass {
-  workOnHomework(): string;
-  displayName(): string;
+interface StudentClassInterface {
+  firstName: string;
+  lastName: string;
+  workOnHomework (): string;
+  displayName (): string;
 }
+interface StudentClassConstructor {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
+class StudentClass implements StudentClassInterface {
+  firstName: string;
 
-export class StudentClass implements IStudentClass {
-  private _firstName!: string;
-  private _lastName!: string;
+  lastName: string;
 
   constructor(firstName: string, lastName: string) {
-    this._firstName = firstName;
-    this._lastName = lastName;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
-  workOnHomework() {
+  workOnHomework(): string {
     return 'Currently working';
   }
 
-  displayName() {
-    return this._firstName;
+  displayName(): string {
+    return this.firstName;
   }
-}
-
-export function createStudent(ctor: IStudentClassConstructor, firstName: string, lastName: string): IStudentClass {
-  return new ctor(firstName, lastName);
 }
