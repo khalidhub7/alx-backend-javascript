@@ -1,7 +1,7 @@
 process.stdout.write('Welcome to Holberton School, what is your name?');
 process.stdout.write('\n');
 
-process.stdin.setEncoding('utf-8')
+process.stdin.setEncoding('utf-8');
 process.stdin.on('data', chunk => {
   process.stdout.write(
     `Your name is: ${chunk}`);
