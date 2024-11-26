@@ -7,7 +7,6 @@ process.stdin.on('data', chunk => {
     `Your name is: ${chunk}`);
   process.stdin.pause();
 });
-process.stdin.emit('end');
 
 process.stdin.on('end', () => {
   if (!process.stdin.isTTY) {
