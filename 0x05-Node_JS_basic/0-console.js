@@ -1,7 +1,4 @@
-#!/usr/bin/node
-function displayMessage(message) {
-  process.stdout.write(msg);
-  process.stdout.write('\n');
+function displayMessage (msg) {
+  console.log(msg);
 }
-
 module.exports = displayMessage;
