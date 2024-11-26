@@ -1,5 +1,3 @@
-// retrieve name, then exit the program
-
 console.log('Welcome to Holberton School, what is your name?');
 
 process.stdin.on('data', chunk => {
