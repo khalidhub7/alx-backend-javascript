@@ -6,6 +6,7 @@ process.stdin.on('data', chunk => {
   process.stdout.write(
     `Your name is: ${chunk}`);
   process.stdin.pause();
+  process.stdin.end();
 });
 
 process.stdin.on('end', () => {
