@@ -1,82 +1,43 @@
+#!/usr/bin/node
 const fs = require('fs');
 
-function countStudents(path) {
+const countStudents = (path) => {
   try {
-    const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n').slice(1, -1);
-
-    const validLines = lines.filter((line) => {
-      const items = line.split(',');
-      return items.length === 4 && items.every((item) => item.trim());
+    const csvData = fs.readFileSync(path, 'utf8');
+    const lines = csvData.split('\n');
+    const rows = lines.filter((item) => item.trim() !== '');
+    console.log(`Number of students: ${rows.length - 1}`);
+    const data = [];
+    const head = [...rows[0].split(',')];
+    rows.splice(0, 1);
+    for (let i = 0; i < rows.length; i += 1) {
+      const student = {};
+      let j = 0;
+      head.forEach((item) => {
+        student[item] = rows[i].split(',')[j];
+        j += 1;
+      });
+      data.push(student);
+    }
+    const countField = {};
+    data.forEach((item) => {
+      if (item.field in countField) {
+        countField[item.field] += 1;
+      } else {
+        countField[item.field] = 1;
+      }
     });
-
-    console.log(`Number of students: ${validLines.length}`);
-
-    const fields = [...new Set(validLines.map((line) => line.split(',')[3]))];
-
-    fields.forEach((field) => {
-      const students = validLines
-        .filter((line) => line.split(',')[3] === field)
-        .map((line) => line.split(',')[0]);
-
-      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+    Object.keys(countField).forEach((key) => {
+      let names = 'List: ';
+      names += data
+        .filter((item) => item.field === key)
+        .map((item) => item.firstname)
+        .join(', ');
+      console.log(`Number of students in ${key}: ${countField[key]}. ${names}`);
     });
-  } catch (err) {
+  } catch (e) {
     throw new Error('Cannot load the database');
   }
-}
+};
 
 module.exports = countStudents;
-
-/* eslint-disable */
-/*
-  Multi-line comment
-*/
-/* eslint-enable */
-
-
-/* const fs = require('fs');
-
-function countStudents (path) {
-  try {
-    const data = fs.readFileSync(
-      path, 'utf8').split('\n').slice(1, -1);
-
-    // handle lines
-    const lines = [];
-    for (const line of data) {
-      const items = line.split(',');
-      if (items.length === 4 &&
-        items.every(item => item.trim())) {
-        lines.push(line);
-      }
-    }
-    console.log(`Number of students: ${lines.length}`);
-
-    // handle exists fields
-    const fields = [];
-    for (const line of lines) {
-      const items = line.split(',');
-      const field = items[3];
-      if (!fields.includes(field)) {
-        fields.push(field);
-      }
-    }
-
-    // students by field
-    for (const field of fields) {
-      const students = [];
-      for (const line of lines) {
-        const items = line.split(',');
-        if (items[3] === field) {
-          students.push(items[0]);
-        }
-      }
-      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
-    }
-  } catch (error) {
-    throw new Error('Cannot load the database');
-  }
-}
-
-module.exports = countStudents; */
