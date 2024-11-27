@@ -1,16 +1,14 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   try {
-    const data = fs.readFileSync(
-      path, 'utf8').split('\n').slice(1, -1);
+    const data = fs.readFileSync(path, 'utf8').split('\n').slice(1, -1);
 
     // handle lines
     const lines = [];
     for (const line of data) {
       const items = line.split(',');
-      if (items.length === 4 &&
-        items.every(item => item.trim())) {
+      if (items.length === 4 && items.every(item => item.trim())) {
         lines.push(line);
       }
     }
