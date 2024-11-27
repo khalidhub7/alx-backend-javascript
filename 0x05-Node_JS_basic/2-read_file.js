@@ -1,43 +1,29 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   try {
-    if (path !== 'database.csv') {
-      throw new Error();
-    }
-
     const data = fs.readFileSync(path, 'utf8');
-    const len = (data.split('\n').length) - 2;
-    const fields = [];
+    const lines = data.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
+    const len = lines.length - 1; // Exclude header line
 
-    for (const line of data.split('\n')) {
-      const field = line.split(',')[3];
-      if (field !== undefined &&
-            field !== 'field' &&
-            !fields.includes(field)) {
-        fields.push(field);
+    const fields = {};
+    for (const line of lines.slice(1)) { // Skip header line
+      const [firstName, lastName, age, field] = line.split(',');
+      if (field && field !== 'field') {
+        if (!fields[field]) {
+          fields[field] = [];
+        }
+        if (!fields[field].includes(firstName)) {
+          fields[field].push(firstName);
+        }
       }
     }
 
     console.log(`Number of students: ${len}`);
-    for (const field of fields) {
-      if (field) {
-        const students = [];
-        for (const line of data.split('\n').slice(1)) {
-          // eslint-disable-next-line no-unused-vars
-          for (const _ of line.split(',')) {
-            if (line.split(',')[3] === field &&
-                        !students.includes(line.split(',')[0])
-            ) {
-              students.push(line.split(',')[0]);
-            }
-          }
-        }
-        console.log(`Number of students in \
-${field}: ${students.length}. List: ${students.join(', ')}`);
-      }
+    for (const [field, students] of Object.entries(fields)) {
+      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
     }
-  } catch {
+  } catch (err) {
     throw new Error('Cannot load the database');
   }
 }
