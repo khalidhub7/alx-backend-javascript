@@ -5,7 +5,6 @@ function countStudents (path) {
     const data = fs.readFileSync(
       path, 'utf8').split('\n').slice(1, -1);
 
-    /* handle lines */
     const lines = [];
     for (const line of data) {
       const items = line.split(',');
@@ -16,7 +15,6 @@ function countStudents (path) {
     }
     console.log(`Number of students: ${lines.length}`);
 
-    /* handle exists fields */
     const fields = [];
     for (const line of lines) {
       const items = line.split(',');
@@ -26,7 +24,7 @@ function countStudents (path) {
       }
     }
 
-    /* students by field */
+
     for (const field of fields) {
       const students = [];
       for (const line of lines) {
