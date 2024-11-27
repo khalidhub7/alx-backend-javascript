@@ -2,8 +2,7 @@ const fs = require('fs');
 
 function countStudents (path) {
   try {
-    const data = fs.readFileSync(
-      path, 'utf8').split('\n').slice(1, -1);
+    const data = fs.readFileSync(path, 'utf8').split('\n').slice(1, -1);
 
     const lines = [];
     for (const line of data) {
@@ -14,6 +13,7 @@ function countStudents (path) {
       }
     }
     console.log(`Number of students: ${lines.length}`);
+
 
     const fields = [];
     for (const line of lines) {
