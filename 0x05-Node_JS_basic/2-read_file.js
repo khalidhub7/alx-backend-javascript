@@ -1,32 +1,43 @@
-#!/usr/bin/node
 const fs = require('fs');
 
-function countStudents(path) {
+function countStudents (path) {
   try {
+    if (path !== 'database.csv') {
+      throw new Error();
+    }
+
     const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n');
-    const students = lines
-      .filter((line) => line)
-      .map((line) => line.split(','));
-    const studentsCount = students.length - 1;
-    const studentsByField = students.slice(1).reduce((acc, student) => {
-      const field = student[3];
-      if (!acc[field]) acc[field] = [];
-      acc[field].push(student[0]);
-      return acc;
-    }, {});
-    console.log(`Number of students: ${studentsCount}`);
-    for (const field in studentsByField) {
-      if (field) {
-        const list = studentsByField[field];
-        console.log(
-          `Number of students in ${field}: ${list.length}. List: ${list.join(
-            ', ',
-          )}`,
-        );
+    const len = (data.split('\n').length) - 2;
+    const fields = [];
+
+    for (const line of data.split('\n')) {
+      const field = line.split(',')[3];
+      if (field !== undefined &&
+            field !== 'field' &&
+            !fields.includes(field)) {
+        fields.push(field);
       }
     }
-  } catch (error) {
+
+    console.log(`Number of students: ${len}`);
+    for (const field of fields) {
+      if (field) {
+        const students = [];
+        for (const line of data.split('\n').slice(1)) {
+          // eslint-disable-next-line no-unused-vars
+          for (const _ of line.split(',')) {
+            if (line.split(',')[3] === field &&
+                        !students.includes(line.split(',')[0])
+            ) {
+              students.push(line.split(',')[0]);
+            }
+          }
+        }
+        console.log(`Number of students in \
+${field}: ${students.length}. List: ${students.join(', ')}`);
+      }
+    }
+  } catch {
     throw new Error('Cannot load the database');
   }
 }
