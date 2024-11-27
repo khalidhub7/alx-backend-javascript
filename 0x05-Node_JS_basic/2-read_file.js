@@ -1,49 +1,33 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   try {
-    const data = fs.readFileSync(path, 'utf8');
-    const len = (data.split('\n').filter(
-      i => i.split(',').length === 4 && i !== '').length) - 1;
-    const fields = [];
+    const data = fs.readFileSync(path, 'utf8').trim();
+    const lines = data.split('\n');
 
-    for (const line of data.split('\n')) {
-      if (line !== '') {
-        const field = line.split(',')[3];
-        if (field !== undefined &&
-            field !== 'field' &&
-            !fields.includes(field)) {
-          fields.push(field);
-        }
-      }
+    if (lines.length < 2) throw new Error('No student data available');
+
+    // Extract header and validate rows
+    const header = lines[0].split(',');
+    if (header.length !== 4) throw new Error('Invalid data format');
+
+    const studentData = lines.slice(1).filter(line => line.split(',').length === 4);
+
+    console.log(`Number of students: ${studentData.length}`);
+
+    const fieldMap = {};
+
+    for (const line of studentData) {
+      const [name, , , field] = line.split(',');
+      if (!fieldMap[field]) fieldMap[field] = [];
+      fieldMap[field].push(name);
     }
 
-    console.log(`Number of students: ${len}`);
-
-    for (const field of fields) {
-      if (field !== '') {
-        const students = [];
-        for (const line of data.split('\n').slice(1)) {
-          if (line !== '') {
-            if (line.split(',').length === 4 &&
-            !line.split(',').includes('')) {
-              // eslint-disable-next-line no-unused-vars
-              for (const _ of line.split(',')) {
-                if (line.split(',')[3] === field &&
-                              !students.includes(line.split(',')[0])
-                ) {
-                  students.push(line.split(',')[0]);
-                }
-              }
-            }
-          }
-        }
-
-        console.log(`Number of students in \
-${field}: ${students.length}. List: ${students.join(', ')}`);
-      }
+    for (const [field, students] of Object.entries(fieldMap)) {
+      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
     }
-  } catch {
+  } catch (error) {
+    console.error('Cannot load the database:', error.message);
     throw new Error('Cannot load the database');
   }
 }
