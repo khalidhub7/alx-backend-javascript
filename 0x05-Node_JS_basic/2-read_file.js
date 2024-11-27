@@ -1,33 +1,43 @@
 const fs = require('fs');
 
-function countStudents(path) {
+function countStudents (path) {
   try {
-    const data = fs.readFileSync(path, 'utf8').trim();
-    const lines = data.split('\n');
+    const data = fs.readFileSync(path, 'utf8');
+    const len = data.split('\n').filter(
+      line => line.trim() && line.split(
+        ',').length === 4).length;
+    const fields = [];
+    const lines = data.split('\n').filter(
+      line => line.trim() !== '');
 
-    if (lines.length < 2) throw new Error('No student data available');
-
-    // Extract header and validate rows
-    const header = lines[0].split(',');
-    if (header.length !== 4) throw new Error('Invalid data format');
-
-    const studentData = lines.slice(1).filter(line => line.split(',').length === 4);
-
-    console.log(`Number of students: ${studentData.length}`);
-
-    const fieldMap = {};
-
-    for (const line of studentData) {
-      const [name, , , field] = line.split(',');
-      if (!fieldMap[field]) fieldMap[field] = [];
-      fieldMap[field].push(name);
+    for (const line of lines.slice(1)) {
+      const field = line.split(',')[3];
+      if (field &&
+            !fields.includes(field)) {
+        fields.push(field);
+      }
     }
 
-    for (const [field, students] of Object.entries(fieldMap)) {
-      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+    console.log(`Number of students: ${len - 1}`);
+
+    for (const field of fields) {
+      if (field) {
+        const studentsbyfield = [];
+        for (const item of lines.slice(1)) {
+          const name = item.split(',')[0];
+          const current = item.split(',')[3];
+          if (field === current) {
+            if (!studentsbyfield.includes(name)) {
+              studentsbyfield.push(name);
+            }
+          }
+        }
+        console.log(`Number of students in \
+${field}: ${studentsbyfield.length}. \
+List: ${studentsbyfield.join(', ')}`);
+      }
     }
-  } catch (error) {
-    console.error('Cannot load the database:', error.message);
+  } catch {
     throw new Error('Cannot load the database');
   }
 }
