@@ -1,8 +1,8 @@
 process.stdout.write(
   'Welcome to Holberton School, what is your name?\n');
+process.stdin.setEncoding('utf8');
 
 if (process.stdin.isTTY) {
-  process.stdin.setEncoding('utf8');
   process.stdin.on('data', chunk => {
     process.stdout.write(`Your name is: ${chunk}`);
     process.stdin.pause();
@@ -10,7 +10,6 @@ if (process.stdin.isTTY) {
   });
 }
 if (process.stdin.isTTY === undefined) {
-  process.stdin.setEncoding('utf8');
   process.stdin.on('data', chunk => {
     process.stdout.write(`Your name is: ${chunk}`);
   });
