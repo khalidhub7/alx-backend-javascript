@@ -8,7 +8,7 @@ function countStudents (path) {
         ',').length === 4).length;
     const fields = [];
     const lines = data.split('\n').filter(
-      line => line.trim() !== '');
+        line => line.trim() !== '' && line.split(',').filter(col => col.trim()).length === 4);      
 
     for (const line of lines.slice(1)) {
       const field = line.split(',')[3];
