@@ -28,6 +28,12 @@ function countStudents(path) {
 
 module.exports = countStudents;
 
+/* eslint-disable */
+/*
+  Multi-line comment
+*/
+/* eslint-enable */
+
 
 /* const fs = require('fs');
 
