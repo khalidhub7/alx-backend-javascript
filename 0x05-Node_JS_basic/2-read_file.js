@@ -3,7 +3,8 @@ const fs = require('fs');
 function countStudents (path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const len = (data.split('\n').length) - 2;
+    const len = (data.split('\n').filter(
+      i => i.split(',').length === 4 && i !== '').length) - 1;
     const fields = [];
 
     for (const line of data.split('\n')) {
@@ -24,11 +25,12 @@ function countStudents (path) {
         const students = [];
         for (const line of data.split('\n').slice(1)) {
           if (line !== '') {
-            // eslint-disable-next-line no-unused-vars
-            for (const _ of line.split(',')) {
-              if (line.split(',').length === 4) {
+            if (line.split(',').length === 4 &&
+            !line.split(',').includes('')) {
+              // eslint-disable-next-line no-unused-vars
+              for (const _ of line.split(',')) {
                 if (line.split(',')[3] === field &&
-                        !students.includes(line.split(',')[0])
+                              !students.includes(line.split(',')[0])
                 ) {
                   students.push(line.split(',')[0]);
                 }
