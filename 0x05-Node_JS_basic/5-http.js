@@ -24,7 +24,8 @@ const app = http.createServer((request, response) => {
       .then(() => {
         response.statusCode = 200;
         response.setHeader('Content-Type', 'text/plain');
-        response.end(`This is the list of our students\n${output}`);
+        response.end(`This is the list of our \
+students\n${output}`);
       })
       .catch((err) => {
         response.statusCode = 500;
