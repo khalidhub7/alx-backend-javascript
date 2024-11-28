@@ -8,6 +8,6 @@ const app = createServer((_, response) => {
   response.end('Hello Holberton School!');
 });
 
-app.listen((host, port));
+app.listen((port, host));
 
 module.exports = app;
