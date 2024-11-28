@@ -28,7 +28,8 @@ const app = http.createServer((request, response) => {
       })
       .catch((err) => {
         response.statusCode = 500;
-        response.end(err.message);
+        response.end(`This is the list of our \
+students\n${err.message}`);
       })
       .finally(() => {
         console.log = beforewrap;
