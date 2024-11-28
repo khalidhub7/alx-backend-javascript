@@ -1,65 +1,41 @@
 const http = require('http');
-const fs = require('fs');
+const { argv } = require('process');
+const countStudents = require('./3-read_file_async');
 
 const port = 1245;
-const hostname = '127.0.0.1';
-const path = process.argv[2];
+const host = 'localhost';
+const app = http.createServer((request, response) => {
+  if (request.url === '/') {
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('Hello Holberton School!');
+  } else if (request.url === '/students') {
+    let output = '';
+    const beforewrap = console.log;
+    // wrap console.log function
+    // so that is return instead of log
+    console.log = (
+      message,
+    ) => { output += `${message}\n`; };
 
-function countStudents(path) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
-        reject(new Error('Cannot load the database'));
-      } else {
-        let output = '';
-        const lines = data.split('\n');
-        const students = lines
-          .filter((line) => line)
-          .map((line) => line.split(','));
-        const studentsCount = students.length - 1;
-        const studentsByField = students.slice(1).reduce((acc, student) => {
-          const field = student[3];
-          if (!acc[field]) acc[field] = [];
-          acc[field].push(student[0]);
-          return acc;
-        }, {});
-        output += `Number of students: ${studentsCount}\n`;
-        for (const field in studentsByField) {
-          if (field) {
-            const list = studentsByField[field];
-            output += `Number of students in ${field}: ${
-              list.length
-            }. List: ${list.join(', ')}\n`;
-          }
-        }
-        resolve(output);
-      }
-    });
-  });
-}
-
-const app = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-
-  if (req.url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
-  }
-  if (req.url === '/students') {
-    res.write('This is the list of our students\n');
-    countStudents(path.toString())
-      .then((response) => {
-        const outString = response.slice(0, -1);
-        res.end(outString);
+    countStudents(
+      argv[2],
+    )
+      .then(() => {
+        response.statusCode = 200;
+        response.setHeader('Content-Type', 'text/plain');
+        response.end(`This is the list of our students\n${output}`);
       })
-      .catch(() => {
-        res.statusCode = 404;
-        res.end('Cannot load the database');
+      .catch((err) => {
+        response.statusCode = 500;
+        response.end(err.message);
+      })
+      .finally(() => {
+        console.log = beforewrap;
       });
   }
 });
 
-app.listen(port, hostname, () => {});
+app.listen(port, host);
 
 module.exports = app;
