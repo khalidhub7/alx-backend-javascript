@@ -21,15 +21,17 @@ app.get('/students', (request, response) => {
     process.argv[2],
   )
     .then(() => {
-      response.statusCode = 200;
-      response.setHeader('Content-Type', 'text/plain');
+      response.status(200).setHeader(
+        'Content-Type', 'text/plain',
+      );
       response.send(`This is the list of our \
 students\n${output}`);
     })
     .catch((err) => {
-      response.statusCode = 500;
-      response.send(`This is the list of our \
-students\n${err.message}`);
+      response.status(500).send(
+        `This is the list of our \
+students\n${err.message}`,
+      );
     })
     .finally(() => {
       console.log = beforewrap;
