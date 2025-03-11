@@ -1,0 +1,36 @@
+## Setup
+
+### Install NodeJS 12.11.x
+(Install in your home directory):
+```
+curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install nodejs -y
+```
+Verify installation:
+```
+$ nodejs -v
+v12.11.1
+$ npm -v
+6.11.3
+```
+
+### Install Jest, Babel, and ESLint
+Navigate to your project directory and install Jest, Babel, and ESLint using the supplied `package.json` file:
+```
+npm install
+```
+
+### Configuration Files
+Add the following files to your project directory:
+- `package.json`
+- `babel.config.js`
+- `.eslintrc.js`
+
+### Finally…
+Run the following command in your project folder to install all necessary dependencies:
+```
+npm install
+```
+
+
