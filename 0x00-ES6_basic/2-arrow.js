@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
-export default function getNeighborhoodsList() {
-  this.sanFranciscoNeighborhoods = [
-    'SOMA', 'Union Square'];
+class getNeighborhoodsList {
+  constructor() {
+    this.sanFranciscoNeighborhoods = [
+      'SOMA', 'Union Square'];
+  }
 
-  this.addNeighborhood = (newNeighborhood) => {
-    const add = () => this.sanFranciscoNeighborhoods.push(
+  addNeighborhood(newNeighborhood) {
+    this.sanFranciscoNeighborhoods.push(
       newNeighborhood,
     );
-    add();
     return this.sanFranciscoNeighborhoods;
-  };
+  }
 }
+export default getNeighborhoodsList;
