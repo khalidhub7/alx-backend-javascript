@@ -6,7 +6,7 @@ class getNeighborhoodsList {
       'SOMA', 'Union Square'];
   }
 
-  addNeighborhood(newNeighborhood) {
+  addNeighborhood = (newNeighborhood) => {
     this.sanFranciscoNeighborhoods.push(
       newNeighborhood,
     );
