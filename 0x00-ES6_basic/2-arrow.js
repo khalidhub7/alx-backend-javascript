@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-function getNeighborhoodsList() {
+export default function getNeighborhoodsList() {
   this.sanFranciscoNeighborhoods = [
     'SOMA', 'Union Square'];
 
@@ -11,4 +11,3 @@ function getNeighborhoodsList() {
     return this.sanFranciscoNeighborhoods;
   };
 }
-export default getNeighborhoodsList;
