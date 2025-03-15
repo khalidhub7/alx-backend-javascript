@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import getBudgetObject from './7-getBudgetObject';
+import getBudgetObject from './7-getBudgetObject.js';
 
 const getFullBudgetObject = (income, gdp, capita) => {
   const budget = getBudgetObject(income, gdp, capita);
