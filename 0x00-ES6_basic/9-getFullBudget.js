@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import getBudgetObject from './7-getBudgetObject';
 
 export default function getFullBudgetObject(
@@ -9,5 +10,6 @@ export default function getFullBudgetObject(
     getIncomeInDollars: (income) => `$${income}`,
     getIncomeInEuros: (income) => `${income} euros`,
   };
+
   return fullBudget;
 }
