@@ -5,8 +5,11 @@ const createReportObject = (
 ) => {
   const obj = {
     allEmployees: { ...employeesList },
-    getNumberOfDepartments: (
-    ) => Object.keys(this.allEmployees).length,
+    getNumberOfDepartments() {
+      return Object.keys(
+        this.allEmployees,
+      ).length;
+    },
   };
   return obj;
 };
