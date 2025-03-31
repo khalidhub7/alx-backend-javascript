@@ -3,15 +3,20 @@
 const createIteratorObject = (
   report,
 ) => {
-  const objs = [];
-  for (const department in report.allEmployees) {
-    if (Object.prototype.hasOwnProperty.call(
-      report.allEmployees, department,
-    )) {
-      objs.push(...report.allEmployees[department]);
-    }
-  }
-  return objs;
+  const obj = {};
+  // 'for...of' need 'Symbol.iterator' to iterate over obj
+  obj[Symbol.iterator] = () => {
+    let i = 0;
+    const employees = Object.values(report.allEmployees).flat(Infinity);
+    return {
+      next() {
+        const value = employees[i];
+        i += 1;
+        return { value, done: i > employees.length };
+      },
+    };
+  };
+  // console.log(obj)
+  return obj;
 };
-
 export default createIteratorObject;
