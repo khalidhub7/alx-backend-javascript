@@ -1,3 +1,7 @@
-export default function iterateThroughObject(reportWithIterator) {
-  return [...reportWithIterator].join(' | ');
-}
+#!/usr/bin/env node
+
+const iterateThroughObject = (
+  reportWithIterator,
+) => (
+  `${[...reportWithIterator].join(' | ')}`);
+export default iterateThroughObject;
