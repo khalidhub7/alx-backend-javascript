@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const returnHowManyArguments = (
+export default function returnHowManyArguments(
   ...arr
-) => (arr.length);
-export default returnHowManyArguments;
+) { return arr.length; }
