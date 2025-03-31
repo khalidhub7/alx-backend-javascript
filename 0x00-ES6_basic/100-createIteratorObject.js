@@ -9,6 +9,8 @@ const createIteratorObject = (
     let i = 0;
     const employees = Object.values(report.allEmployees).flat(Infinity);
     return {
+      // 'next' is a method of the object returned by 'Symbol.iterator',
+      // after it called by 'for...of'
       next() {
         const value = employees[i];
         i += 1;
@@ -16,7 +18,7 @@ const createIteratorObject = (
       },
     };
   };
-  // console.log(obj)
+  // console.log(obj);
   return obj;
 };
 export default createIteratorObject;
