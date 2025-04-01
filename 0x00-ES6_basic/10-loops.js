@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-const appendToEachArrayValue = (
-  array, appendString,
-) => {
+const appendToEachArrayValue = (array,
+  appendString) => {
   const newarr = [];
   for (const i of array) {
-    newarr.push(`${appendString}${i}`);
+    newarr.push(i + appendString);
   }
   return newarr;
 };
