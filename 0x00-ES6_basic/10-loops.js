@@ -4,7 +4,7 @@ const appendToEachArrayValue = (array,
   appendString) => {
   const newarr = [];
   for (const i of array) {
-    newarr.push(i + appendString);
+    newarr.push(appendString + i);
   }
   return newarr;
 };
