@@ -2,6 +2,5 @@
 
 const iterateThroughObject = (
   reportWithIterator,
-) => (
-  `${[...reportWithIterator].join(' | ')}`);
+) => [...reportWithIterator].join(' | ');
 export default iterateThroughObject;
