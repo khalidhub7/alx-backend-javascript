@@ -2,9 +2,9 @@
 
 const getCurrentYear = (
 ) => new Date().getFullYear();
-const getBudgetForCurrentYear = (
-  income, gdp, capita,
-) => {
+
+const getBudgetForCurrentYear = (income, gdp,
+  capita) => {
   const y = getCurrentYear();
   const budget = {
     [`income-${y}`]: income,
