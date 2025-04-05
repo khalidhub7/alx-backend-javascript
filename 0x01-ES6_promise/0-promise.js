@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
-const getResponseFromAPI = async () => undefined;
+const getResponseFromAPI = (
+) => Promise.resolve();
 export default getResponseFromAPI;
