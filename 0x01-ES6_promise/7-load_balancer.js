@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-export default function loadBalancer(chinaDownload, USDownload) {
-  return Promise
-    .race([chinaDownload, USDownload]);
-}
+
+const loadBalancer = (chinaDownload,
+  USDownload) => (
+  Promise.race([USDownload, chinaDownload])
+);
+export default loadBalancer;
