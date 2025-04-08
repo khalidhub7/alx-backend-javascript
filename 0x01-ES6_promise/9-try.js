@@ -1,12 +1,14 @@
 #!/usr/bin/env node
-export default function guardrail(mathFunction) {
+
+const guardrail = (mathFunction) => {
   const queue = [];
   try {
-    const data = mathFunction();
-    queue.push(data);
-  } catch (i) {
-    queue.push(`Error: ${i.message}`);
+    queue.push(mathFunction());
+  } catch (err) {
+    queue.push(err);
+  } finally {
+    queue.push('Guardrail was processed');
   }
-  queue.push('Guardrail was processed');
   return queue;
-}
+};
+export default guardrail;
