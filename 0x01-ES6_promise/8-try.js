@@ -1,17 +1,18 @@
 #!/usr/bin/env node
-export default (numerator, denominator) => {
-  if (denominator === 0) {
-    throw new Error('cannot divide by 0');
-  }
-  return numerator / denominator;
-};
-/* export default function divideFunction(numerator, denominator) {
+
+const divideFunction = (numerator,
+  denominator) => {
+  let result;
   try {
     if (denominator === 0) {
-      throw new Error('cannot divide by 0');
+      throw new Error(
+        'cannot divide by 0',
+      );
     }
-    return numerator / denominator;
-  } catch (i) {
-    throw (i);
+    result = numerator / denominator;
+  } catch (err) {
+    throw err.message;
   }
-} */
+  return result;
+};
+export default divideFunction;
