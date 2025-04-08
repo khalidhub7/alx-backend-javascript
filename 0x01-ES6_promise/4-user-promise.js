@@ -1,9 +1,5 @@
 #!/usr/bin/env node
-export default function signUpUser(firstName, lastName) {
-  return new Promise((resolve) => {
-    resolve({
-      firstName,
-      lastName,
-    });
-  });
-}
+
+const signUpUser = async (firstName,
+  lastName) => ({ firstName, lastName });
+export default signUpUser;
