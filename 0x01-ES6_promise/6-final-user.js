@@ -10,5 +10,13 @@ const handleProfileSignup = (
     signUpUser(firstName, lastName),
     uploadPhoto(fileName),
   ],
-);
+).then((results) => {
+  for (const result of results) {
+    if ('reason' in result) {
+      result.value = result.reason;
+      delete result.reason;
+    }
+  }
+  return results;
+});
 export default handleProfileSignup;
