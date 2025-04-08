@@ -13,7 +13,7 @@ const handleProfileSignup = (
 ).then((results) => {
   for (const result of results) {
     if ('reason' in result) {
-      result.value = result.reason.message;
+      result.value = String(result.reason.message);
       delete result.reason;
     }
   }
