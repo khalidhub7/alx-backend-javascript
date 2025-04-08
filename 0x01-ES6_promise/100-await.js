@@ -2,7 +2,7 @@
 
 import { uploadPhoto, createUser } from './utils';
 
-const asyncUploadUser = () => (
+const asyncUploadUser = async () => (
   Promise
     .all([uploadPhoto(), createUser()])
     .then((val) => ({ photo: val[0], user: val[1] }))
