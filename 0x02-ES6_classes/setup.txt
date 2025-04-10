@@ -9,6 +9,7 @@ sudo bash nodesource_setup.sh
 sudo apt install nodejs -y
 nodejs -v  # should output v12.11.1
 npm -v     # should output 6.11.3
+```
 
 
 npm install   # This will install Jest, Babel, and ESLint as defined in package.json.
