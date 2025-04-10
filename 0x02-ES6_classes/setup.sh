@@ -1,26 +1,24 @@
-# 🛠️ Setup Instructions
+#!/bin/bash
 
-# from your home directory
-# install NodeJS 12.11.xi
-curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt install nodejs -y
-✅ Verify installation:
-nodejs -v && npm -v # should output v12.11.1 / 6.11.3
+# detect ubuntu version
+VERSION_CODENAME=$(lsb_release -c | awk '{print $2}')
 
+if [[ "$VERSION_CODENAME" == "noble" ]]; then
+	echo "Since you're using Ubuntu 24.04 (Noble), 
+we will install Node.js 18.x"
+	curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+else
+	echo "Since you're using a different Ubuntu version, 
+we will install Node.js 12.x"
+	curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+fi
 
-# ⚠️ ubuntu 24.04 (Noble) Users ‼️
-# node.js 12.x is not supported. use Node.js 18.x instead
-curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt install nodejs -y
-node -v && npm -v
+# install Node.js silently
+sudo -s bash nodesource_setup.sh >/dev/null 2>&1
+sudo apt install nodejs -y >/dev/null 2>&1
+node -v >/dev/null 2>&1 && npm -v >/dev/null 2>&1
 
-
-# 📦 Install Dependencies
-npm install  # installs Jest, Babel, ESLint (via package.json)
-
-
-📄 package.json
-📄 babel.config.js
-📄 .eslintrc.js
+# install dependencies silently
+npm install >/dev/null 2>&1
+echo "
+done"
