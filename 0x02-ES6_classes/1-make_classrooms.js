@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import ClassRoom from './0-classroom';
 
 function initializeRooms() {
