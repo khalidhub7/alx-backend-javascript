@@ -11,6 +11,13 @@ sudo apt install nodejs -y
 nodejs -v && npm -v # should output v12.11.1 / 6.11.3
 ```
 
+⚠️ If you're using Ubuntu 24.04 (noble), Node.js 12.x is not supported.
+Instead, install Node.js 18.x (recommended)
+
+curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install nodejs -y
+node -v && npm -v
 
 npm install   # This will install Jest, Babel, and ESLint \
 as defined in package.json.
