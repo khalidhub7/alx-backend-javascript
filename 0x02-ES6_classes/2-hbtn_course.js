@@ -1,43 +1,61 @@
-export default class HolbertonCourse {
-  constructor(name, length, students) {
-    this.name = name;
-    this.length = length;
-    this.students = students;
+class ALXCourse {
+  constructor(name = '', length = 0, students = []) {
+    if (typeof (name) !== 'string') {
+      throw new TypeError(
+        'Name must be a string',
+      );
+    }
+    this._name = name;
+    if (typeof (length) !== 'number') {
+      throw new TypeError(
+        'Length must be a number',
+      );
+    }
+    this._length = length;
+    if (!Array.isArray(students)
+     || !students.every((i) => typeof (i) === 'string')) {
+      throw new TypeError(
+        'Students must be a array of string',
+      );
+    }
+    this._students = students;
   }
 
-  set name(value) {
-    if (typeof (value) === 'string') {
-      this._name = String(value);
+  set name(newvalue) {
+    if (typeof (newvalue) === 'string') {
+      this._name = newvalue;
     } else {
-      throw TypeError('Name must be a string');
+      throw new TypeError(
+        'Name must be a string',
+      );
     }
   }
 
-  set length(value) {
-    if (typeof (value) === 'number') {
-      this._length = Number(value);
+  set length(newvalue) {
+    if (typeof (newvalue) === 'number') {
+      this._length = newvalue;
     } else {
-      throw TypeError('Length must be a number');
+      throw new TypeError(
+        'Length must be a number',
+      );
     }
   }
 
-  set students(value) {
-    if (Array.isArray(value)) {
-      this._students = (value);
+  set students(newvalue) {
+    if (Array.isArray(newvalue)
+     && newvalue.every((i) => typeof (i) === 'string')) {
+      this._students = newvalue;
     } else {
-      throw TypeError('students must be a array');
+      throw new TypeError(
+        'Students must be an array of strings',
+      );
     }
   }
 
-  get name() {
-    return this._name;
-  }
+  get name() { return this._name; }
 
-  get length() {
-    return this._length;
-  }
+  get length() { return this._length; }
 
-  get students() {
-    return this._students;
-  }
+  get students() { return this._students; }
 }
+export default ALXCourse;
