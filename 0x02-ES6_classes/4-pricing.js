@@ -10,7 +10,7 @@ class Pricing {
     this._amount = amount;
     if (!(currency instanceof Currency)) {
       throw new TypeError(
-        'currency must be a Currency obj',
+        'currency must be a Currency object',
       );
     }
     this._currency = currency;
@@ -31,7 +31,7 @@ class Pricing {
       this._currency = newvalue;
     } else {
       throw new TypeError(
-        'currency must be a Currency obj',
+        'currency must be a Currency object',
       );
     }
   }
