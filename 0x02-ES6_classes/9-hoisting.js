@@ -1,48 +1,54 @@
-export class HolbertonClass {
+class ALXClass {
   constructor(year, location) {
     this._year = year;
     this._location = location;
   }
 
-  get year() {
-    return this._year;
-  }
+  get year() { return this._year; }
 
-  get location() {
-    return this._location;
-  }
+  get location() { return this._location; }
 }
 
-export class StudentHolberton {
-  constructor(firstName, lastName, holbertonClass) {
+const class2019 = new ALXClass(2019, 'San Francisco');
+const class2020 = new ALXClass(2020, 'San Francisco');
+
+class StudentALX {
+  constructor(firstName, lastName, alxClass) {
     this._firstName = firstName;
     this._lastName = lastName;
-    this._holbertonClass = holbertonClass;
+    this._alxClass = alxClass;
   }
 
   get fullName() {
     return `${this._firstName} ${this._lastName}`;
   }
 
-  get holbertonClass() {
-    return this._holbertonClass;
-  }
+  get alxClass() { return this._alxClass; }
 
   get fullStudentDescription() {
-    return `${this._firstName} ${this._lastName} - \
-${this._holbertonClass.year} - ${this._holbertonClass.location}`;
+    return `${this.fullName} \
+- ${this.alxClass.year} - ${this.alxClass.location}`;
   }
 }
 
-const class2019 = new HolbertonClass(2019, 'San Francisco');
-const class2020 = new HolbertonClass(2020, 'San Francisco');
+const listOfStudents = [
+  new StudentALX('Guillaume', 'Salva', class2020),
+  new StudentALX('John', 'Doe', class2020),
+  new StudentALX('Albert', 'Clinton', class2019),
+  new StudentALX('Donald', 'Bush', class2019),
+  new StudentALX('Jason', 'Sandler', class2019),
+];
 
-const student1 = new StudentHolberton('Guillaume', 'Salva', class2020);
-const student2 = new StudentHolberton('John', 'Doe', class2020);
-const student3 = new StudentHolberton('Albert', 'Clinton', class2019);
-const student4 = new StudentHolberton('Donald', 'Bush', class2019);
-const student5 = new StudentHolberton('Jason', 'Sandler', class2019);
+/* just for testing */
+const HolbertonClass = ALXClass;
+const StudentHolberton = StudentALX;
 
-const listOfStudents = [student1, student2, student3, student4, student5];
-
+/* make listOfStudents use StudentHolberton
+prototype and add holbertonClass */
+listOfStudents.forEach((student, index) => {
+  const newStudent = Object.create(StudentHolberton.prototype);
+  Object.assign(newStudent, student, { holbertonClass: student.alxClass });
+  listOfStudents[index] = newStudent;
+});
+export { HolbertonClass, StudentHolberton };
 export default listOfStudents;
