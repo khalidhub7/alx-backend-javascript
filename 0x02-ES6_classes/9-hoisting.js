@@ -39,4 +39,5 @@ const listOfStudents = [
   new StudentALX('Jason', 'Sandler', class2019),
 ];
 
+export { ALXClass, StudentALX };
 export default listOfStudents;
