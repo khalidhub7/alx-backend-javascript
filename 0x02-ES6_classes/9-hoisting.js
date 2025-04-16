@@ -39,5 +39,8 @@ const listOfStudents = [
   new StudentALX('Jason', 'Sandler', class2019),
 ];
 
-export { ALXClass, StudentALX };
+/* just for testing */
+const HolbertonClass = ALXClass;
+const StudentHolberton = StudentALX;
+export { HolbertonClass, StudentHolberton };
 export default listOfStudents;
