@@ -47,9 +47,9 @@ listOfStudents.forEach((current, i) => {
   const newobject = Object.create(
     StudentHolberton.prototype,
   );
-  if (i === 0) {
+  /* if (i === 0) {
     console.log(newobject);
-  }
+  } */
   const data = {
     ...current,
     holbertonClass: current.alxClass,
