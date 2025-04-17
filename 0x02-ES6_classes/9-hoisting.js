@@ -39,16 +39,24 @@ const listOfStudents = [
   new StudentALX('Jason', 'Sandler', class2019),
 ];
 
-/* just for testing */
+// lets change names for testing purpose
 const HolbertonClass = ALXClass;
 const StudentHolberton = StudentALX;
 
-/* make listOfStudents use StudentHolberton
-prototype and add holbertonClass */
-listOfStudents.forEach((student, index) => {
-  const newStudent = Object.create(StudentHolberton.prototype);
-  Object.assign(newStudent, student, { holbertonClass: student.alxClass });
-  listOfStudents[index] = newStudent;
+listOfStudents.forEach((current, i) => {
+  const newobject = Object.create(
+    StudentHolberton.prototype,
+  );
+  if (i === 0) {
+    console.log(newobject);
+  }
+  const data = {
+    ...current,
+    _holbertonClass: current.alxClass,
+  };
+  delete data._alxClass;
+  Object.assign(newobject, data);
+  listOfStudents[i] = newobject;
 });
 export { HolbertonClass, StudentHolberton };
 export default listOfStudents;
