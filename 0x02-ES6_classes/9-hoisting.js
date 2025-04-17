@@ -31,32 +31,22 @@ class StudentALX {
   }
 }
 
-const listOfStudents = [
-  new StudentALX('Guillaume', 'Salva', class2020),
-  new StudentALX('John', 'Doe', class2020),
-  new StudentALX('Albert', 'Clinton', class2019),
-  new StudentALX('Donald', 'Bush', class2019),
-  new StudentALX('Jason', 'Sandler', class2019),
-];
-
 // lets change names for testing purpose
 const HolbertonClass = ALXClass;
-const StudentHolberton = StudentALX;
+class StudentHolberton extends StudentALX {
+  constructor(firstName, lastName, alxClass) {
+    super(firstName, lastName, alxClass);
+    this.holbertonClass = this._alxClass;
+    delete this._alxClass;
+  }
+}
+const listOfStudents = [
+  new StudentHolberton('Guillaume', 'Salva', class2020),
+  new StudentHolberton('John', 'Doe', class2020),
+  new StudentHolberton('Albert', 'Clinton', class2019),
+  new StudentHolberton('Donald', 'Bush', class2019),
+  new StudentHolberton('Jason', 'Sandler', class2019),
+];
 
-listOfStudents.forEach((current, i) => {
-  const newobject = Object.create(
-    StudentHolberton.prototype,
-  );
-  /* if (i === 0) {
-    console.log(newobject);
-  } */
-  const data = {
-    ...current,
-    holbertonClass: current.alxClass,
-  };
-  delete data._alxClass;
-  Object.assign(newobject, data);
-  listOfStudents[i] = newobject;
-});
 export { HolbertonClass, StudentHolberton };
 export default listOfStudents;
