@@ -52,7 +52,7 @@ listOfStudents.forEach((current, i) => {
   }
   const data = {
     ...current,
-    _holbertonClass: current.alxClass,
+    holbertonClass: current.alxClass,
   };
   delete data._alxClass;
   Object.assign(newobject, data);
