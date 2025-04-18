@@ -9,9 +9,6 @@ class ALXClass {
   get location() { return this._location; }
 }
 
-const class2019 = new ALXClass(2019, 'San Francisco');
-const class2020 = new ALXClass(2020, 'San Francisco');
-
 class StudentALX {
   constructor(firstName, lastName, alxClass) {
     this._firstName = firstName;
@@ -32,7 +29,11 @@ class StudentALX {
 }
 
 // lets change names for testing purpose
-const HolbertonClass = ALXClass;
+const HolbertonClass = class extends ALXClass {};
+
+const class2019 = new HolbertonClass(2019, 'San Francisco');
+const class2020 = new HolbertonClass(2020, 'San Francisco');
+
 class StudentHolberton extends StudentALX {
   constructor(firstName, lastName, alxClass) {
     super(firstName, lastName, alxClass);
