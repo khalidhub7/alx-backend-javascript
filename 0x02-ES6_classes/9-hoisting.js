@@ -39,6 +39,8 @@ class StudentHolberton extends StudentALX {
     this.holbertonClass = this._alxClass;
     delete this._alxClass;
   }
+
+  get alxClass() { return this.holbertonClass; }
 }
 const listOfStudents = [
   new StudentHolberton('Guillaume', 'Salva', class2020),
