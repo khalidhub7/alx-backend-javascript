@@ -32,7 +32,7 @@ class StudentALX {
 }
 
 // lets change names for testing purpose
-const HolbertonClass = ALXClass;
+class HolbertonClass extends ALXClass {}
 class StudentHolberton extends StudentALX {
   constructor(firstName, lastName, alxClass) {
     super(firstName, lastName, alxClass);
