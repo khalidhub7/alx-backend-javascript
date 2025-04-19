@@ -21,7 +21,6 @@ npm install >/dev/null 2>&1
 # Commented response format for utils.js
 : '
 *** Response data format in "utils.js" file ***
-
 uploadPhoto returns a Promise: {
   "status": 200,
   "body": "photo-profile-1"
@@ -31,6 +30,8 @@ createUser returns a Promise: {
   "firstName": "Guillaume",
   "lastName": "Salva"
 }
+make sure these files in your project directory:
+    package.json, babel.config.js, .eslintrc.js
 '
 
 echo "done"
