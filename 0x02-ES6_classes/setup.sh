@@ -20,5 +20,10 @@ node -v >/dev/null 2>&1 && npm -v >/dev/null 2>&1
 
 # install dependencies silently
 npm install >/dev/null 2>&1
+
+: '
+make sure these files in your project directory:
+    package.json, babel.config.js, .eslintrc.js
+'
 echo "
 done"
