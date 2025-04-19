@@ -9,8 +9,21 @@ class Car {
     this._color = color;
   }
 
+  /*
+  cloneCar() returns a new object from
+  the class specified by [Symbol.species]
+  */
   static get [Symbol.species]() { return this; }
 
-  cloneCar() { return new (this.constructor[Symbol.species])(); }
+  /*
+  - gets class from [Symbol.species], falls back to
+  parent's [Symbol.species] if not overridden in child classes.
+  - this.constructor is a class, [Symbol.species] is a static method
+  that returns the class
+  */
+  cloneCar() {
+    const ClassToClone = this.constructor[Symbol.species];
+    return new ClassToClone();
+  }
 }
 export default Car;
