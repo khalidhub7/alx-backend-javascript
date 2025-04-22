@@ -1,7 +1,6 @@
-#!/usr/bin/env node
-export default function getListStudentIds(arr) {
-  if (!Array.isArray(arr)) {
-    return [];
-  }
-  return arr.map((x) => x.id);
-}
+const getListStudentIds = (arr) => {
+  try {
+    return arr.map((i) => i.id);
+  } catch (err) { return []; }
+};
+export default getListStudentIds;
