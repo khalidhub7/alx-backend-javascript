@@ -1,4 +1,6 @@
-#!/usr/bin/env node
-export default function getStudentsByLocation(arr, city) {
-  return arr.filter((x) => x.location === city);
-}
+const getStudentsByLocation = (arr, city) => (
+  Array.isArray(arr)
+    ? arr.filter((i) => i.location === city)
+    : []
+);
+export default getStudentsByLocation;
