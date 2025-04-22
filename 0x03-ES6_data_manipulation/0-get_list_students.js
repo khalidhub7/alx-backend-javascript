@@ -1,8 +1,8 @@
-#!/usr/bin/env node
-export default function getListStudents() {
-  const per = ['Guillaume', 'James', 'Serena'];
-  const ids = [1, 2, 5];
-  const loca = ['San Francisco', 'Columbia', 'San Francisco'];
-
-  return per.map((a, i) => ({ id: ids[i], firstName: a, location: loca[i] }));
-}
+const getListStudents = () => (
+  [
+    { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
+    { id: 2, firstName: 'James', location: 'Columbia' },
+    { id: 5, firstName: 'Serena', location: 'San Francisco' },
+  ]
+);
+export default getListStudents;
