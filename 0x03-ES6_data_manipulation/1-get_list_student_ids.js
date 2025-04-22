@@ -1,6 +1,6 @@
-const getListStudentIds = (arr) => {
-  try {
-    return arr.map((i) => i.id);
-  } catch (err) { return []; }
-};
+const getListStudentIds = (arr) => (
+  Array.isArray(arr)
+    ? arr.map((i) => i.id)
+    : []
+);
 export default getListStudentIds;
