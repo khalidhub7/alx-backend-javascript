@@ -1,5 +1,6 @@
-#!/usr/bin/env node
-export default function getStudentIdsSum(arr) {
-  const ids = arr.map((x) => x.id);
-  return ids.reduce((sum, i) => sum + i, 0);
-}
+const getStudentIdsSum = (arr) => (
+  Array.isArray(arr)
+    ? arr.reduce((current, i) => current + i.id, 0)
+    : 0
+);
+export default getStudentIdsSum;
