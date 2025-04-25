@@ -1,11 +1,17 @@
-#!/usr/bin/env node
-export default function updateStudentGradeByCity(arr, city, newGrades) {
-  const filtered = arr.filter((x) => x.location === city).map((x) => ({
-    id: x.id,
-    firstName: x.firstName,
-    location: x.location,
-    grade: newGrades.find((i) => i.studentId === x.id) ? (
-      newGrades.find((i) => i.studentId === x.id)).grade : 'N/A',
-  }));
-  return filtered;
-}
+const updateStudentGradeByCity = (getListStudents,
+  city, newGrades) => (
+
+  getListStudents
+    .filter((student) => student.location === city)
+    .map((student) => {
+      const newgrade = newGrades
+        .filter((i) => i.studentId === student.id);
+
+      return {
+        ...student,
+        grade: newgrade.length > 0
+          ? newgrade.pop().grade : 'N/A',
+      };
+    })
+);
+export default updateStudentGradeByCity;
