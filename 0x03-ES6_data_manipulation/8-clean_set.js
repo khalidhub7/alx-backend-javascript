@@ -6,7 +6,7 @@ const cleanSet = (set, startString) => (
         ? i.slice(startString.length)
         : undefined
       ) : undefined))
-      .filter((i) => i !== undefined)
+      .filter((i) => (i) !== undefined)
       .join('-') : ''
 );
 export default cleanSet;
