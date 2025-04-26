@@ -1,12 +1,7 @@
-#!/usr/bin/env node
-
-export default function groceriesList() {
-  const keys = ['Apples', 'Tomatoes',
-    'Pasta', 'Rice', 'Banana'];
-  const values = [10, 10, 1, 1, 5];
-  const map = new Map();
-  keys.forEach((key, i) => {
-    map.set(key, values[i]);
-  });
-  return map;
-}
+const groceriesList = () => (
+  new Map([
+    ['Apples', 10], ['Tomatoes', 10],
+    ['Pasta', 1], ['Rice', 1], ['Banana', 5],
+  ])
+);
+export default groceriesList;
