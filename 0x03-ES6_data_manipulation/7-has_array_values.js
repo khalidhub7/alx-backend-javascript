@@ -1,4 +1,3 @@
-#!/usr/bin/env node
-export default function hasValuesFromArray(set, arr) {
-  return arr.every((i) => set.has(i));
-}
+const hasValuesFromArray = (set, array) => (
+  array.every((i) => set.has(i)));
+export default hasValuesFromArray;
