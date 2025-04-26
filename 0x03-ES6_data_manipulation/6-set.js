@@ -1,4 +1,2 @@
-#!/usr/bin/env node
-export default function setFromArray(arr) {
-  return new Set(arr);
-}
+const setFromArray = (arr) => (new Set(arr));
+export default setFromArray;
