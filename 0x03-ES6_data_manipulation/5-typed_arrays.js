@@ -1,10 +1,12 @@
-#!/usr/bin/env node
-export default function createInt8TypedArray(length, position, value) {
-  const buff = new ArrayBuffer(length);
-  if (position >= length || length <= 0) {
-    throw new Error('Position outside range');
-  }
-  const buffview = new DataView(buff);
-  buffview.setInt8(position, value);
-  return buffview;
-}
+const createInt8TypedArray = (length, position,
+  value) => {
+  if (position < 0 || length <= position
+  ) { throw new Error('Position outside range'); }
+
+  const typedarray = new Int8Array(length);
+  typedarray[position] = value;
+
+  // console.log(`*** ${typedarray} ***`)
+  return new DataView(typedarray.buffer);
+};
+export default createInt8TypedArray;
