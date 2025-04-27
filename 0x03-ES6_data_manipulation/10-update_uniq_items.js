@@ -1,12 +1,8 @@
-#!/usr/bin/env node
-export default function updateUniqueItems(map) {
-  if (!(map instanceof Map)) {
-    throw new Error('Cannot process');
-  }
-  map.forEach((value, key) => {
-    if (value === 1) {
-      map.set(key, 100);
-    }
-  });
-  return map;
-}
+const updateUniqueItems = (map) => (
+  map instanceof Map
+    ? Array.from(map.keys()).forEach((key) => (
+      map.get(key) === 1
+        ? map.set(key, 100) : undefined
+    )) : new Error('Cannot process')
+);
+export default updateUniqueItems;
