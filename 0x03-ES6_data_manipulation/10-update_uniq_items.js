@@ -3,6 +3,10 @@ const updateUniqueItems = (map) => (
     ? Array.from(map.keys()).forEach((key) => (
       map.get(key) === 1
         ? map.set(key, 100) : undefined
-    )) : new Error('Cannot process')
+    )) : (() => {
+      throw new Error(
+        'Cannot process',
+      );
+    })()
 );
 export default updateUniqueItems;
