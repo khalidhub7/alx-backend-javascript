@@ -33,11 +33,15 @@ interface StudentConstructor {
   new (firstName: string, lastName: string): StudentClassInterface;
 }
 // class StudentClass
-class StudentClass {
+class StudentClass implements StudentClassInterface {
   constructor(
     public firstName: string,
     public lastName: string,
   ) {}
-  workOnHomework = () => "Currently working";
-  displayName = () => this.firstName;
+  workOnHomework() {
+    return "Currently working";
+  }
+  displayName() {
+    return this.firstName;
+  }
 }
