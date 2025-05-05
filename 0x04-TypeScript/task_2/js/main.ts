@@ -1,60 +1,76 @@
-interface DirectorInterface {
+namespace Interfaces {
+  export interface DirectorInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workDirectorTasks(): string;
-}
-interface TeacherInterface {
+  }
+  export interface TeacherInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workTeacherTasks(): string;
-}
-
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return 'Working from home';
   }
-
-  getCoffeeBreak(): string {
-    return 'Getting a coffee break';
+  // functions interfaces
+  export interface CreateEmployeeInterface {
+    (arg: string | number): Director | Teacher;
   }
-
-  workDirectorTasks(): string {
-    return 'Getting to director tasks';
+  export interface IsDirectorInterface {
+    (arg: any): boolean;
   }
-}
-
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return 'Cannot work from home';
+  export interface executeWorkInterface {
+    (arg: Teacher | Director): string;
   }
-
-  getCoffeeBreak(): string {
-    return 'Cannot have a break';
-  }
-
-  workTeacherTasks(): string {
-    return 'Getting to work';
+  type Subjects = "Math" | "History";
+  export interface teachClassInterface {
+    (arg: Subjects): string;
   }
 }
 
-function createEmployee(salary: number | string) {
-  if (typeof (salary) === 'number' && salary < 500) {
-    return new Teacher();
+// director class
+class Director implements Interfaces.DirectorInterface {
+  constructor() {}
+  workFromHome() {
+    return "Working from home";
   }
-  return new Director();
-}
-function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
+  getCoffeeBreak() {
+    return "Getting a coffee break";
+  }
+  workDirectorTasks() {
+    return "Getting to director tasks";
+  }
 }
 
-function executeWork(employee: Director | Teacher) {
-  if (isDirector(employee)) {
-    console.log(employee.workDirectorTasks());
-  } else {
-    console.log(employee.workTeacherTasks());
+// teacher class
+class Teacher implements Interfaces.TeacherInterface {
+  constructor() {}
+  workFromHome() {
+    return "Cannot work from home";
+  }
+  getCoffeeBreak() {
+    return "Cannot have a break";
+  }
+  workTeacherTasks() {
+    return "Getting to work";
   }
 }
-type Subjects = 'Math' | 'History'
-function teachClass(todayClass: Subjects): string {
-  return `Teaching ${todayClass}`;
-}
+
+// createEmployee function
+const createEmployee: Interfaces.CreateEmployeeInterface = (salary) =>
+  typeof salary === "number" && salary < 500 ? new Teacher() : new Director();
+
+// isdirector function
+const isDirector: Interfaces.IsDirectorInterface = (employee) =>
+  employee instanceof Director;
+
+// executeWork function
+const executeWork: Interfaces.executeWorkInterface = (employee) => {
+  if (employee instanceof Director) {
+    return employee.workDirectorTasks();
+  }
+  if (employee instanceof Teacher) {
+    return employee.workTeacherTasks();
+  }
+};
+
+// teachClass function
+const teachClass: Interfaces.teachClassInterface = (todayClass) =>
+  `Teaching ${todayClass}`;
