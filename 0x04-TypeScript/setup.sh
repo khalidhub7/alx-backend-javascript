@@ -1,12 +1,25 @@
-npm install --save-dev prettier    # install prettier
-npx prettier --write js/main.ts    # format typescript file
+# install prettier
+npm install --save-dev prettier    
+npx prettier --write js/main.ts  # auto-fix with prettier
 
-npx eslint js/main.ts --fix        # run eslint and fix issues
+# install compatible eslint version
+npm install eslint@6.8.0 --no-save
+npx eslint js/main.ts  # check
+npx eslint js/main.ts --fix  # auto-fix
 
-tsc js/main.ts && node js/main.js   # compile and run typescript
+# compile and run typescript
+tsc js/main.ts && node js/main.js
 
+# install dependencies and run scripts
+npm install    
+npm run start-dev  # start dev server
+npm run build      # build project
+npm test           # run tests
 
-npm install          # install dependencies
-npm run start-dev    # start dev server
-npm run build        # build project
-npm test             # run tests
+# make sure "initial config files" are in the current directory
+# package.json, .eslintrc.js, tsconfig.json, webpack.config.js
+
+# make files read-only to prevent npm changes
+sudo chattr +i package.json .eslintrc.js tsconfig.json webpack.config.js
+
+# to see output, go to 'http://localhost:8080/'
