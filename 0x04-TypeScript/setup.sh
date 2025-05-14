@@ -1,29 +1,29 @@
-# install prettier
+# Install Prettier for automatic code formatting
 npm install --save-dev prettier    
-npx prettier --write js/main.ts  # auto-fix with prettier
+npx prettier --write js/main.ts  # Auto-fix with Prettier
 
-# install compatible eslint version
+# Install compatible ESLint version for linting
 npm install eslint@6.8.0 --no-save
-npx eslint js/main.ts  # check
-npx eslint js/main.ts --fix  # auto-fix
+npx eslint js/main.ts  # Check for linting errors
+npx eslint js/main.ts --fix  # Auto-fix linting issues
 
-# compile and run typescript
+# Compile and run TypeScript
 tsc js/main.ts && node js/main.js
 
-# install dependencies and run scripts
+# Install dependencies and run scripts
 npm install    
-npm run start-dev  # start dev server
-npm run build      # build project
-npm test           # run tests
+npm run start-dev  # Start the development server
+npm run build      # Build the project
+npm test           # Run tests
 
-# make sure "initial config files" are in the current directory
+# Ensure initial config files are in the current directory:
 # package.json, .eslintrc.js, tsconfig.json, webpack.config.js
 
-# make files read-only to prevent npm changes
+# Make config files read-only to prevent npm from modifying them
 sudo chattr +i package.json .eslintrc.js tsconfig.json webpack.config.js
 
-# to see output, go to 'http://localhost:8080/'
+# To see the output, navigate to: 'http://localhost:8080/'
 
-# to run task_4
+# To run task_4 (combine TypeScript files and execute)
 tsc --outFile merged.js ./js/subjects/*.ts js/main.ts
 node merged.js
