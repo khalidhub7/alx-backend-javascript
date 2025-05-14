@@ -23,3 +23,7 @@ npm test           # run tests
 sudo chattr +i package.json .eslintrc.js tsconfig.json webpack.config.js
 
 # to see output, go to 'http://localhost:8080/'
+
+# to run task_4
+tsc --outFile merged.js ./js/subjects/*.ts js/main.ts
+node merged.js
