@@ -5,10 +5,9 @@ const countStudents = (path) => new Promise(
     reader.readFile(path, 'utf-8', (err, data) => {
       // console.log(`*** ${data} ***`)
 
-      if (err || data.length === 0) {
-        reject((() => {
-          throw new Error('Cannot load the database');
-        })());
+      if (err) {
+        reject(new Error('Cannot load the database'));
+        return;
       }
 
       // handle lines
