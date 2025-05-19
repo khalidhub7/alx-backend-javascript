@@ -4,6 +4,7 @@ const countStudents = (path) => new Promise(
   (resolve, reject) => {
     try {
       reader.readFile(path, 'utf-8', (err, data) => {
+        if (err) throw new Error('Cannot load the database');
         // handle lines
         const lines = data.split('\n').slice(1)
           .map((line) => (line.split(',')))
@@ -31,9 +32,7 @@ const countStudents = (path) => new Promise(
         resolve();
       });
     } catch (err) {
-      reject(new Error(
-        'Cannot load the database',
-      ));
+      reject(err);
     }
   },
 );
