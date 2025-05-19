@@ -4,7 +4,8 @@ process.stdout.write(
 
 process.stdin
   .on('data', (data) => {
-    process.stdout.write(`Your name is: ${data}`);
+    process.stdout.write(
+      `Your name is: ${data.toString().trim()}\n`);
     process.stdin.pause();
   })
   .on('end', () => {
