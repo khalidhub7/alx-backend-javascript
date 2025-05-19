@@ -1,7 +1,7 @@
 const reader = require('fs');
 
 const countStudents = (path) => {
-  if (path) {
+  try {
     const content = reader.readFileSync(path, 'utf-8');
 
     // handle lines
@@ -26,6 +26,6 @@ const countStudents = (path) => {
       console.log(`Number of students in ${field}\
 : ${students.length}. List: ${students.join(', ')}`);
     });
-  } else { throw Error('Cannot load the database'); }
+  } catch (err) { throw Error('Cannot load the database'); }
 };
 module.exports = countStudents;
