@@ -62,4 +62,4 @@ const app = createServer((req, res) => {
   }
 }).listen(1245, 'localhost');
 module.exports = app;
-module.exports = countStudents;
+module.exports.countStudents = countStudents;
