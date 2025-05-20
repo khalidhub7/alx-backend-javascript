@@ -1,12 +1,9 @@
-const app = require('express')();
+const express = require('express');
 
-const host = 'localhost';
-const port = 1245;
+const app = express();
 
-app.get('/', (request, response) => {
-  response.send('Hello Holberton School!');
-});
-
-app.listen(port, host);
-
+app.get('/', (req, res) => {
+  res.statusCode = 200;
+  res.send('Hello Holberton!');
+}).listen(1245, 'localhost');
 module.exports = app;
