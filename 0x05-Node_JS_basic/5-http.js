@@ -56,7 +56,8 @@ const app = createServer((req, res) => {
       })
       .catch((err) => {
         res.statusCode = 500;
-        res.end(err.message);
+        res.end(['This is the list of our students',
+          err.message].join('\n'));
       });
   }
 }).listen(1245, 'localhost');
