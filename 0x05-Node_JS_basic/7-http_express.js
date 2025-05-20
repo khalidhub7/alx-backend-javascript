@@ -11,7 +11,7 @@ app
   })
   .get('/students', (req, res) => {
     countStudents(process.argv[2])
-    // express ignores '\n', use '<br>' instead
+    // always specify Content-Type
       .then((data) => {
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).send(`${data}`);
@@ -23,5 +23,5 @@ app
             err.message].join('\n'),
         );
       });
-  }).listen(1246, 'localhost');
+  }).listen(1245, 'localhost');
 module.exports = app;
