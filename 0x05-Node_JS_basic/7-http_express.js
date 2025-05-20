@@ -1,43 +1,25 @@
-const app = require('express')();
-const countStudents = require('./3-read_file_async');
+const express = require('express');
+const { countStudents } = require('./5-http');
 
-const host = 'localhost';
-const port = 1245;
+const app = express();
 
-app.get('/', (request, response) => {
-  response.send('Hello Holberton School!');
-});
-
-app.get('/students', (request, response) => {
-  let output = '';
-  const beforewrap = console.log;
-  // wrap console.log function
-  // so that is return instead of log
-  console.log = (
-    message,
-  ) => { output += `${message}\n`; };
-
-  countStudents(
-    process.argv[2],
-  )
-    .then(() => {
-      response.status(200).setHeader(
-        'Content-Type', 'text/plain',
-      );
-      response.send(`This is the list of our \
-students\n${output}`);
-    })
-    .catch((err) => {
-      response.status(500).send(
-        `This is the list of our \
-students\n${err.message}`,
-      );
-    })
-    .finally(() => {
-      console.log = beforewrap;
-    });
-});
-
-app.listen(port, host);
-
+app
+  .get('/', (req, res) => {
+    res.status(200).send(
+      'Hello Holberton School!',
+    );
+  })
+  .get('/students', (req, res) => {
+    countStudents(process.argv[2])
+    // express ignores '\n', use '<br>' instead
+      .then((data) => {
+        res.status(200).send(`${data.split('\n').join('<br>')}`);
+      })
+      .catch((err) => {
+        res.status(500).send(
+          ['This is the list of our students',
+            err.message].join('<br>'),
+        );
+      });
+  }).listen(1246, 'localhost');
 module.exports = app;
