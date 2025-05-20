@@ -46,17 +46,17 @@ List: ${students.join(', ')}`,
 // task 5
 const app = createServer((req, res) => {
   if (req.url === '/') {
-    res.end('Hello Holberton School!');
     res.statusCode = 200;
+    res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     countStudents(process.argv[2])
       .then((data) => {
-        res.end(`${data}`);
         res.statusCode = 200;
+        res.end(`${data}`);
       })
       .catch((err) => {
-        res.end(err.message);
         res.statusCode = 500;
+        res.end(err.message);
       });
   }
 }).listen(1245, 'localhost');
