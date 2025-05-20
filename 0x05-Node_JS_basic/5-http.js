@@ -1,43 +1,63 @@
-const http = require('http');
-const { argv } = require('process');
-const countStudents = require('./3-read_file_async');
+const { createServer } = require('http');
 
-const port = 1245;
-const host = 'localhost';
-const app = http.createServer((request, response) => {
-  if (request.url === '/') {
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
-    response.end('Hello Holberton School!');
-  } else if (request.url === '/students') {
-    let output = '';
-    const beforewrap = console.log;
-    // wrap console.log function
-    // so that is return instead of log
-    console.log = (
-      message,
-    ) => { output += `${message}\n`; };
+// edited countStudents to return result instead of log
+const reader = require('fs');
 
-    countStudents(
-      argv[2],
-    )
-      .then(() => {
-        response.statusCode = 200;
-        response.setHeader('Content-Type', 'text/plain');
-        response.end(`This is the list of our \
-students\n${output}`);
+const countStudents = async (path) => {
+  try {
+    const content = await reader.promises.readFile(
+      path, 'utf-8',
+    );
+    // console.log(`*** ${content} ***`);
+
+    // handle lines
+    const lines = content
+      .split('\n').slice(1)
+      .map((line) => (line.split(',')))
+      .filter(((line) => (
+        line.length === 4 && line.every((i) => i !== '')
+      )));
+
+    // handle exists fields
+    const fields = [
+      ...new Set(lines.map((line) => line[3])),
+    ];
+
+    const logs = [
+      'This is the list of our students',
+      `Number of students: ${lines.length}`,
+    ];
+
+    fields.forEach((field) => {
+      // students by field
+      const students = lines
+        .filter((line) => (line[3] === field))
+        .map((line) => line[0]);
+
+      logs.push(
+        `Number of students in ${field}: ${students.length}. \
+List: ${students.join(', ')}`,
+      );
+    });
+    return logs.join('\n');
+  } catch (err) { throw new Error('Cannot load the database'); }
+};
+
+// task 5
+const app = createServer((req, res) => {
+  if (req.url === '/') {
+    res.end('Hello Holberton School!');
+    res.statusCode = 200;
+  } else if (req.url === '/students') {
+    countStudents(process.argv[2])
+      .then((data) => {
+        res.end(`${data}`);
+        res.statusCode = 200;
       })
       .catch((err) => {
-        response.statusCode = 500;
-        response.end(`This is the list of our \
-students\n${err.message}`);
-      })
-      .finally(() => {
-        console.log = beforewrap;
+        res.end(err.message);
+        res.statusCode = 500;
       });
   }
-});
-
-app.listen(port, host);
-
+}).listen(1245, 'localhost');
 module.exports = app;
