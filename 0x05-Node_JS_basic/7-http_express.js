@@ -1,5 +1,5 @@
 const express = require('express');
-const { countStudents } = require('./5-http');
+const countStudents = require('./5-http').countStudents;
 
 const app = express();
 
