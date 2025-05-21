@@ -1,50 +1,37 @@
-const fs = require('fs');
+import fs from 'fs';
 
-function readDatabase(filepath) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filepath, 'utf8',
-      (err, data) => {
-        if (err) {
-          reject(err);
-        }
-        const studentsbyfield = {};
+// read file asynchronously
+const readDatabase = async (path) => {
+  try {
+    const file = await fs.promises
+      .readFile(path, 'utf-8');
 
-        // valid lines
-        const lines = [];
-        for (const line of data.split(
-          '\n',
-        ).slice(1, -1)) {
-          const items = line.split(',');
-          if (items.length === 4
-        && items.every((item) => item.trim())) {
-            lines.push(line);
-          }
-        }
+    // valid lines
+    const lines = file
+      .split('\n').slice(1)
+      .map((line) => (line.split(',')))
+      .filter(((line) => (
+        line.length === 4 && line.every((i) => i !== '')
+      )));
 
-        // handle exists fields
-        const fields = [];
-        for (const line of lines) {
-          const items = line.split(',');
-          const field = items[3];
-          if (!fields.includes(field)) {
-            fields.push(field);
-          }
-        }
+    const obj = {};
 
-        // students by field
-        for (const field of fields) {
-          const students = [];
-          for (const line of lines) {
-            const items = line.split(',');
-            if (items[3] === field) {
-              students.push(items[0]);
-            }
-          }
-          studentsbyfield[field] = students;
-        }
-        resolve(studentsbyfield);
-      });
-  });
-}
+    // handle exists fields
+    const fields = [
+      ...new Set(lines.map((line) => line[3])),
+    ];
 
-module.exports = readDatabase;
+    // students by field
+    fields.forEach((f) => {
+      obj[f] = lines
+        .filter((l) => l[3] === f)
+        .map((fl) => fl[0]);
+    });
+
+    // console.log(obj)
+    return obj;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export default readDatabase;
