@@ -3,32 +3,35 @@ import readDatabase from '../utils';
 class StudentsController {
   // all students by field using the 'readDatabase' promise
   static getAllStudents(request, response) {
-    readDatabase(process.argv[2]).then((data) => {
-      const tobesend = [
-        'This is the list of our students',
-      ];
+    readDatabase(process.argv[2])
+      .then((data) => {
+        const tobesend = [
+          'This is the list of our students',
+        ];
 
-      // generate a log line
-      Object.entries(data)
-        .sort((a, b) => a[0].localeCompare(b[0]))
-        .forEach(([k, v]) => {
-          tobesend.push(
-            `Number of students in ${k}: ${v.length}. \
+        // generate a log line
+        Object.entries(data)
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .forEach(([k, v]) => {
+            tobesend.push(
+              `Number of students in ${k}: ${v.length}. \
 List: ${v.join(', ')}`,
-          );
-        });
+            );
+          });
 
-      response.setHeader(
-        'Content-Type', 'text/plain',
-      );
-      response.status(200)
-        .send(tobesend.join('\n'));
-    }).catch((err) => {
-      response.setHeader(
-        'Content-Type', 'text/plain',
-      );
-      response.status(500).send(err.message);
-    });
+        response.setHeader(
+          'Content-Type', 'text/plain',
+        );
+        response.status(200)
+          .send(tobesend.join('\n'));
+      })
+
+      .catch(() => {
+        response.setHeader(
+          'Content-Type', 'text/plain',
+        );
+        response.status(500).send('Cannot load the database');
+      });
   }
 
   // الطلاب حسب التخصص
