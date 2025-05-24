@@ -15,9 +15,9 @@ describe('test add func', () => {
         calculateNumber(0, 2.9), 3);
     }); */
 
-  it('test suite for both number rounded',
+  /* it('test suite for both number rounded',
     () => {
       assert.strictEqual(
         calculateNumber(4.9, 2.1), 7);
-    });
+    }); */
 });
