@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import calculateNumber from './0-calcul.js';
-import { assert } from 'chai';
+import assert from 'assert';
 
 describe('test add func', () => {
   it('should return 7', () => {
