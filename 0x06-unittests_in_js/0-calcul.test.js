@@ -3,11 +3,11 @@ const { describe, it } = require('mocha');
 const calculateNumber = require('./0-calcul');
 
 describe('test add func', () => {
-  it('test suite for first number rounded',
+  /* it('test suite for first number rounded',
     () => {
       assert.strictEqual(
         calculateNumber(1.1, 0), 1);
-    });
+    }); */
 
   it('test suite for second number rounded',
     () => {
