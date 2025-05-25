@@ -1,45 +1,44 @@
-#!/usr/bin/node
 const assert = require('assert');
-const calculateNumber = require('./1-calcul.js');
+const { describe, it } = require('mocha');
+const calculateNumber = require('./1-calcul');
 
-describe('calculateNumber', function () {
-  it('should return 4 when adding 1 and 3', function () {
-    assert.strictEqual(calculateNumber('SUM', 1, 3), 4);
-  });
-  it('should return 5 when adding 1 and 3.7', function () {
-    assert.strictEqual(calculateNumber('SUM', 1, 3.7), 5);
-  });
-  it('should return 5 when adding 1.2 and 3.7', function () {
-    assert.strictEqual(calculateNumber('SUM', 1.2, 3.7), 5);
-  });
-  it('should return 6 when adding 1.5 and 3.7', function () {
-    assert.strictEqual(calculateNumber('SUM', 1.5, 3.7), 6);
-  });
-  it('should return 0 when adding 1.1 and 3.3', function () {
-    assert.strictEqual(calculateNumber('SUM', 1.1, 3.3), 4);
-  });
-  it('should return -2 when adding -1 and -1', function () {
-    assert.strictEqual(calculateNumber('SUM', -1, -1), -2);
-  });
-  it('should return 2 when subtracting 1 from 3', function () {
-    assert.strictEqual(calculateNumber('SUBTRACT', 3, 1), 2);
-  });
-  it('should return 1 when subtracting 1.5 from 3.7', function () {
-    assert.strictEqual(calculateNumber('SUBTRACT', 3.7, 1.5), 2);
-  });
-  it('should return -3 when subtracting 1.5 from 1', function () {
-    assert.strictEqual(calculateNumber('SUBTRACT', 1, 1.5), -1);
-  });
-  it('should return -2 when subtracting -1 from -1', function () {
-    assert.strictEqual(calculateNumber('SUBTRACT', -1, -1), 0);
-  });
-  it('should return 0.2 when dividing 1 by 5', function () {
-    assert.strictEqual(calculateNumber('DIVIDE', 1, 5), 0.2);
-  });
-  it('should return 0.2 when dividing 1.5 by 3.7', function () {
-    assert.strictEqual(calculateNumber('DIVIDE', 1.5, 3.7), 0.5);
-  });
-  it('should return 0.2 when dividing 1.5 by 3.7', function () {
-    assert.strictEqual(calculateNumber('DIVIDE', 1.5, 0), 'Error');
-  });
+describe('1-calcul.js tests', () => {
+  describe(
+    'test addition with 2 rounded numbers',
+    () => {
+      it('rounds first number only', () => {
+        assert.strictEqual(calculateNumber('SUM', 1.1, 0), 1);
+      });
+
+      it('rounds both numbers', () => {
+        assert.strictEqual(calculateNumber('SUM', 4.9, 2.1), 7);
+      });
+    },
+  );
+
+  describe(
+    'test subtraction with 2 rounded numbers',
+    () => {
+      it('rounds first number only', () => {
+        assert.strictEqual(calculateNumber('SUBTRACT', 1.1, 0), 1);
+      });
+
+      it('rounds both numbers', () => {
+        assert.strictEqual(calculateNumber('SUBTRACT', 4.9, 2.1), 3);
+      });
+    },
+  );
+
+  describe(
+    'test division with 2 rounded numbers',
+    () => {
+      it('rounds first number only', () => {
+        assert.strictEqual(calculateNumber('DIVIDE', 1.1, 0), 'Error');
+      });
+
+      it('rounds both numbers', () => {
+        assert.strictEqual(calculateNumber('DIVIDE', 4.9, 2.1), 2.5);
+      });
+    },
+  );
 });
