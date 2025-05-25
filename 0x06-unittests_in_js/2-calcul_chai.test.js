@@ -2,7 +2,7 @@ const { describe, it } = require('mocha');
 const { expect } = require('chai');
 const calculateNumber = require('./2-calcul_chai');
 
-describe('1-calcul.js tests', () => {
+describe('2-calcul.js tests', () => {
   describe(
     'test addition with 2 rounded numbers',
     () => {
