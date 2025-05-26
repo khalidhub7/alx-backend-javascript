@@ -1,4 +1,4 @@
-const { spy, stub } = require('sinon');
+const sinon = require('sinon');
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
 const Utils = require('./utils');
@@ -8,13 +8,13 @@ describe('sendPaymentRequestToApi', () => {
   let spyCalcNum;
 
   // prevents console.log during tests
-  before(() => stub(console, 'log'));
+  before(() => sinon.stub(console, 'log'));
 
   // restores Utils.calculateNumber
   after(() => Utils.calculateNumber.restore());
 
   it('should spy on Utils.calculateNumber',
-    () => { spyCalcNum = spy(Utils, 'calculateNumber'); });
+    () => { spyCalcNum = sinon.spy(Utils, 'calculateNumber'); });
 
   it('should call sendPaymentRequestToApi with args',
     () => sendPaymentRequestToApi(100, 20));
