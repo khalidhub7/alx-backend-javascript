@@ -13,22 +13,22 @@ describe('1-calcul.js tests', () => {
   describe(
     'test subtraction with 2 rounded numbers',
     () => {
-      it('rounds both numbers', () => {
-        assert.strictEqual(calculateNumber('SUBTRACT', 4.9, 2.1), 3);
-      });
+      it('rounds both numbers', () => assert.strictEqual(
+        calculateNumber('SUBTRACT', 4.9, 2.1), 3,
+      ));
     },
   );
 
   describe(
     'test division with 2 rounded numbers',
     () => {
-      /* it('rounds first number only', () => {
-        assert.strictEqual(calculateNumber('DIVIDE', 1.1, 0), 'Error');
-      }); */
+      it('rounds first number only', () => assert.strictEqual(
+        calculateNumber('DIVIDE', 1.1, 0), 'Error',
+      ));
 
-      it('rounds both numbers', () => {
-        assert.strictEqual(calculateNumber('DIVIDE', 4.9, 2.1), 2.5);
-      });
+      it('rounds both numbers', () => assert.strictEqual(
+        calculateNumber('DIVIDE', 4.9, 2.1), 2.5,
+      ));
     },
   );
 });
