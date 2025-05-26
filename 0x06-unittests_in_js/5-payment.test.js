@@ -1,25 +1,28 @@
-const assert = require('assert');
 const sinon = require('sinon');
-const sendPaymentRequestToApi = require('./5-payment.js');
+const { expect } = require('chai');
+const { describe, it } = require('mocha');
+const sendPaymentRequestToApi = require('./5-payment');
 
-describe('sendPaymentRequestToApi', function () {
-  let consoleSpy;
+describe('sendPaymentRequestToApi', () => {
+  let spyFunc;
 
-  beforeEach(function () {
-    consoleSpy = sinon.spy(console, 'log');
-  });
+  beforeEach(() => { spyFunc = sinon.spy(console, 'log'); });
 
-  afterEach(function () {
-    consoleSpy.restore();
-  });
+  afterEach(() => spyFunc.restore());
 
-  it('should return 120 if the sendPaymentRequestToApi is called with 100 and 20', function () {
-    sendPaymentRequestToApi(100, 20);
-    assert(consoleSpy.calledOnceWith('The total is: 120'));
-  });
+  it('should log the correct total for 100 and 20',
+    () => {
+      sendPaymentRequestToApi(100, 20);
+      expect(spyFunc.calledOnce).to.equal(true);
+      expect(spyFunc.calledWith('The total is: 120'))
+        .to.equal(true);
+    });
 
-  it('should return 20 if the sendPaymentRequestToApi is called with 10 and 10', function () {
-    sendPaymentRequestToApi(10, 10);
-    assert(consoleSpy.calledOnceWith('The total is: 20'));
-  });
+  it('should log the correct total for 10 and 10',
+    () => {
+      sendPaymentRequestToApi(10, 10);
+      expect(spyFunc.calledOnce).to.equal(true);
+      expect(spyFunc.calledWith('The total is: 20'))
+        .to.equal(true);
+    });
 });
