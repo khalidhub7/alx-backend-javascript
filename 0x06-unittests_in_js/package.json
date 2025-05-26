@@ -5,18 +5,20 @@
   "main": "",
   "scripts": {
     "test": "mocha",
-    "lint": "npx eslint"
+    "lint": "eslint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "4.3.7",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-mocha": "^10.0.0",
     "mocha": "^10.2.0",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "sinon": "^20.0.0"
   }
 }
