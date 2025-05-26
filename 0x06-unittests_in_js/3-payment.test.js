@@ -1,31 +1,24 @@
-const { describe, it } = require('mocha');
+const { spy, stub } = require('sinon');
 const { expect } = require('chai');
-const sinon = require('sinon');
-
-const sendPaymentRequestToApi = require('./3-payment');
+const { describe, it } = require('mocha');
 const Utils = require('./utils');
+const sendPaymentRequestToApi = require('./3-payment');
 
 describe('sendPaymentRequestToApi', () => {
-  before(() => {
-    sinon.stub(console, 'log').returns();
-  });
+  let spyCalcNum;
 
-  after(() => {
-    console.log.restore();
-    Utils.calculateNumber.restore();
-  });
+  // prevents console.log during tests
+  before(() => stub(console, 'log'));
 
-  let spycalcnum;
+  // restores Utils.calculateNumber
+  after(() => Utils.calculateNumber.restore());
 
-  it('spy Utils.calculateNumber',
-    () => {
-      spycalcnum = sinon.spy(Utils, 'calculateNumber');
-    });
+  it('should spy on Utils.calculateNumber',
+    () => { spyCalcNum = spy(Utils, 'calculateNumber'); });
 
-  it('call sendPaymentRequestToApi',
+  it('should call sendPaymentRequestToApi with args',
     () => sendPaymentRequestToApi(100, 20));
 
-  it('calculateNumber called with correct args',
-    () => expect(spycalcnum
-      .calledWith('SUM', 100, 20)).to.equal(true));
+  it('should check Utils.calculateNumber called with correct args',
+    () => expect(spyCalcNum.calledWith('SUM', 100, 20)).to.be.true);
 });

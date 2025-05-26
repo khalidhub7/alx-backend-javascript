@@ -12,5 +12,4 @@ class Utils {
     return undefined;
   }
 }
-
 module.exports = Utils;
