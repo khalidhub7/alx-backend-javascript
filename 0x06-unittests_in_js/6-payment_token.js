@@ -1,9 +1,8 @@
-#!/usr/bin/node
-
-function getPaymentTokenFromAPI(success) {
-  if (success) {
-    return Promise.resolve({ data: 'Successful response from the API' });
-  }
-}
-
+const getPaymentTokenFromAPI = (success) => {
+  if (success === true) {
+    return {
+      data: 'Successful response from the API',
+    };
+  } return undefined;
+};
 module.exports = getPaymentTokenFromAPI;
