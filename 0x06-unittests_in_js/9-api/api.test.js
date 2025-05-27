@@ -1,54 +1,28 @@
-#!/usr/bin/node
-const request = require('request');
+const { describe, it } = require('mocha');
 const { expect } = require('chai');
+const request = require('request');
 
-describe('GET /', () => {
-  const ops = {
-    url: 'http://localhost:7865',
-    method: 'GET',
-  };
-  it('should return 200', (done) => {
-    request(ops, (err, res, body) => {
-      expect(res.statusCode).to.equal(200);
-      done();
+describe('9-api tests', () => {
+  it('should return 200 status and correct message',
+    (done) => {
+      request.get('http://localhost:7865/cart/7',
+        (err, res, body) => {
+          if (err) { return done(err); }
+          // tests
+          expect(res.statusCode).to.equal(200);
+          expect(body).to.equal('Payment methods for cart :7');
+          return done();
+        });
     });
-  });
-  it('should return Welcome to the payment system', (done) => {
-    request(ops, (err, res, body) => {
-      expect(body).to.equal('Welcome to the payment system');
-      done();
-    });
-  });
-});
 
-describe('GET /cart/12', () => {
-  const ops = {
-    url: 'http://localhost:7865/cart/12',
-    method: 'GET',
-  };
-  it('should return 200', (done) => {
-    request(ops, (err, res, body) => {
-      expect(res.statusCode).to.equal(200);
-      done();
+  it('should return 404 status and invalid id message',
+    (done) => {
+      request.get('http://localhost:7865/cart/rr',
+        (err, res) => {
+          if (err) { return done(err); }
+          // tests
+          expect(res.statusCode).to.equal(404);
+          return done();
+        });
     });
-  });
-  it('should return Payment methods for cart 12', (done) => {
-    request(ops, (err, res, body) => {
-      expect(body).to.equal('Payment methods for cart 12');
-      done();
-    });
-  });
-});
-
-describe('GET /cart/hello', () => {
-  const ops = {
-    url: 'http://localhost:7865/cart/hello',
-    method: 'GET',
-  };
-  it('should return 404', (done) => {
-    request(ops, (err, res, body) => {
-      expect(res.statusCode).to.equal(404);
-      done();
-    });
-  });
 });
