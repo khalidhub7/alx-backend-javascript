@@ -3,7 +3,19 @@ const { expect } = require('chai');
 const request = require('request');
 
 describe('9-api tests', () => {
-  it('should return 200 status and correct message',
+  it('should return 200 and "welcome" for GET /',
+    (done) => {
+      request.get('http://localhost:7865/',
+        (err, res, body) => {
+          if (err) { return done(err); }
+          // tests
+          expect(res.statusCode).to.equal(200);
+          expect(body).to.equal('Welcome to the payment system');
+          return done();
+        });
+    });
+
+  it('should return 200 and correct cart message for valid id',
     (done) => {
       request.get('http://localhost:7865/cart/7',
         (err, res, body) => {
@@ -15,7 +27,7 @@ describe('9-api tests', () => {
         });
     });
 
-  it('should return 404 status and invalid id message',
+  it('should return 404 for invalid cart id',
     (done) => {
       request.get('http://localhost:7865/cart/rr',
         (err, res) => {
