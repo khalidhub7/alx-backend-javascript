@@ -10,7 +10,7 @@ describe('9-api tests', () => {
           if (err) { return done(err); }
           // tests
           expect(res.statusCode).to.equal(200);
-          expect(body).to.equal('Payment methods for cart :7');
+          expect(body).to.equal('Payment methods for cart 7');
           return done();
         });
     });
