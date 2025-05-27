@@ -11,7 +11,7 @@ app
     // regex makes express auto send 404 on invalid input
     const id = Number(req.params.id);
     res.status(200)
-      .send(`Payment methods for cart :${id}`);
+      .send(`Payment methods for cart ${id}`);
   })
 
   .listen(7865, 'localhost', () => console.log(
